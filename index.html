@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CrewSignal | Automated Reputation Management</title>
+    <style>
+        :root {
+            --bg: #f1f5f9;
+            --surface: #ffffff;
+            --text-main: #0f172a;
+            --text-muted: #475569;
+            --border: #94a3b8;
+            --primary: #0284c7; 
+            --primary-hover: #0369a1;
+        }
+        body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; background: var(--bg); color: var(--text-main); line-height: 1.6; margin: 0; padding: 20px; }
+        .container { max-width: 650px; margin: 40px auto; }
+        .header { border-bottom: 3px solid var(--text-main); padding-bottom: 20px; margin-bottom: 30px; }
+        .brand { font-size: 2.8rem; font-weight: 900; letter-spacing: -0.05em; text-transform: uppercase; color: var(--text-main); line-height: 1; }
+        .brand span { color: var(--primary); }
+        .tagline { font-size: 1.1rem; color: var(--text-muted); font-weight: 600; margin-top: 10px; }
+        .card { background: var(--surface); border: 2px solid var(--border); padding: 30px; margin-bottom: 30px; border-radius: 4px; box-shadow: 4px 4px 0px rgba(148, 163, 184, 0.3); }
+        h2 { margin-top: 0; font-size: 1.4rem; border-bottom: 2px solid var(--bg); padding-bottom: 10px; text-transform: uppercase; letter-spacing: 0.05em; }
+        .workflow-box { background: var(--bg); border-left: 4px solid var(--primary); padding: 15px; font-family: monospace; font-size: 0.95rem; margin: 20px 0; color: var(--text-main); }
+        .form-group { margin-bottom: 20px; }
+        label { display: block; font-weight: 700; font-size: 0.85rem; margin-bottom: 8px; text-transform: uppercase; color: var(--text-muted); }
+        input { width: 100%; padding: 12px; border: 2px solid var(--border); border-radius: 4px; font-size: 1rem; box-sizing: border-box; font-family: inherit; transition: border-color 0.2s; }
+        input:focus { outline: none; border-color: var(--primary); }
+        button { background: var(--primary); color: white; border: none; padding: 16px 20px; font-size: 1rem; font-weight: bold; width: 100%; cursor: pointer; text-transform: uppercase; letter-spacing: 0.05em; border-radius: 4px; transition: background 0.2s; }
+        button:hover { background: var(--primary-hover); }
+        .disclaimer { font-size: 0.75rem; color: var(--text-muted); margin-top: 20px; border-top: 1px solid var(--bg); padding-top: 15px; line-height: 1.5; }
+        footer { text-align: center; font-size: 0.85rem; color: var(--text-muted); margin-top: 40px; padding-top: 20px; border-top: 1px solid var(--border); }
+        footer a { color: var(--primary); text-decoration: none; font-weight: 600; margin: 0 10px; }
+        footer a:hover { text-decoration: underline; }
+        .legal-text { margin-top: 15px; font-size: 0.75rem; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <div class="brand">Crew<span>Signal</span></div>
+            <div class="tagline">Automated Google Reviews for Field Service Contractors & Salons.</div>
+        </div>
+
+        <div class="card">
+            <h2>Platform Operations</h2>
+            <p>CrewSignal integrates directly into your existing dispatch or appointment software. When a service professional marks a job as "Complete," our system automates a single, transaction-based SMS invitation to the client's verified mobile number.</p>
+            <div class="workflow-box">
+                "Hi [Customer Name], thanks for choosing [Business Name] today! We would value your feedback. Take 30 seconds to review our team here: [Review URL]. Reply STOP to opt out."
+            </div>
+            <p style="font-size: 0.85rem; color: var(--text-muted); margin-bottom: 0;">
+                <em>* SMS messaging is strictly transactional. Message frequency is exactly one notification per completed service event.</em>
+            </p>
+        </div>
+
+        <div class="card">
+            <h2>Request Platform Access</h2>
+            <!-- Replace YOUR_FORM_ID with your actual Formspree hash -->
+            <form action="https://formspree.io/f/xbdewalg" method="POST">
+                <div class="form-group">
+                    <label for="name">Full Name</label>
+                    <input type="text" id="name" name="name" required placeholder="John Doe">
+                </div>
+                <div class="form-group">
+                    <label for="email">Business Email</label>
+                    <input type="email" id="email" name="email" required placeholder="john@company.com">
+                </div>
+                <div class="form-group">
+                    <label for="phone">Mobile Phone Number</label>
+                    <input type="tel" id="phone" name="phone" required placeholder="(555) 555-5555">
+                </div>
+                <button type="submit">Join the Beta Waitlist</button>
+                
+                <div class="disclaimer">
+                    <strong>SMS Consent:</strong> By clicking "Join the Beta Waitlist" or providing your phone number, you explicitly agree to receive automated SMS updates, notifications, and account alerts from CrewSignal. Message and data rates may apply. Messaging frequency varies based on account activity. You can opt out at any time by replying <strong>STOP</strong>. No mobile information will be shared with third parties or affiliates for marketing or promotional purposes.
+                </div>
+            </form>
+        </div>
+
+        <footer>
+            <div>
+                <a href="privacy.html">Privacy Policy</a>
+                <a href="terms.html">Terms & Conditions</a>
+            </div>
+            <div class="legal-text">
+                &copy; 2026 Brandon Myles. All rights reserved.<br>
+                CrewSignal is a proprietary software platform operated by Brandon Myles in Spring Hill, TN.
+            </div>
+        </footer>
+    </div>
+</body>
+</html>
