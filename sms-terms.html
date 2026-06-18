@@ -1,46 +1,105 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SMS Terms | CrewSignal</title>
-    <style>
-        :root { --bg: #f1f5f9; --surface: #ffffff; --text-main: #0f172a; --text-muted: #475569; --border: #94a3b8; --primary: #0284c7; }
-        body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; background: var(--bg); color: var(--text-main); line-height: 1.6; margin: 0; padding: 20px; }
-        .container { max-width: 650px; margin: 40px auto; background: var(--surface); border: 2px solid var(--border); padding: 40px; border-radius: 4px; box-shadow: 4px 4px 0px rgba(148, 163, 184, 0.3); }
-        h1 { margin-top: 0; border-bottom: 3px solid var(--text-main); padding-bottom: 10px; font-size: 2rem; text-transform: uppercase; }
-        h2 { font-size: 1.2rem; color: var(--primary); margin-top: 30px; text-transform: uppercase; }
-        p, li { font-size: 0.95rem; color: var(--text-muted); }
-        .nav { margin-bottom: 20px; font-weight: bold; }
-        .nav a { color: var(--primary); text-decoration: none; text-transform: uppercase; font-size: 0.85rem; }
-    </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SMS Terms | CrewSignal</title>
+<meta name="description" content="CrewSignal SMS Terms — message frequency, opt-out instructions, and carrier compliance details.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;600;700;800;900&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --ink: #16191d; --ink-soft: #3d444d; --paper: #f4f1ea; --paper-card: #fbfaf6;
+    --line: #d9d3c6; --signal: #ff5a1f; --signal-dark: #e0440c; --steel: #1f6feb; --good: #1f7a44;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body { font-family: 'Inter', system-ui, sans-serif; color: var(--ink); background: var(--paper); line-height: 1.7; -webkit-font-smoothing: antialiased; }
+  h1,h2,h3,.logo { font-family: 'Archivo', system-ui, sans-serif; letter-spacing: -0.02em; }
+  .wrap { max-width: 760px; margin: 0 auto; padding: 0 24px; }
+  a { color: inherit; }
+
+  header.bar { position: sticky; top: 0; z-index: 50; background: rgba(244,241,234,.88); backdrop-filter: blur(8px); border-bottom: 1px solid var(--line); }
+  .bar-inner { max-width: 1080px; margin: 0 auto; padding: 0 24px; display: flex; align-items: center; justify-content: space-between; height: 64px; }
+  .logo { font-weight: 900; font-size: 1.35rem; letter-spacing: -0.04em; display:flex; align-items:center; gap:9px; text-decoration: none; color: var(--ink); }
+  .logo .mark { width: 26px; height: 26px; border-radius: 6px; background: var(--signal); position: relative; flex: none; box-shadow: inset 0 0 0 2px rgba(0,0,0,.08); }
+  .logo .mark::before, .logo .mark::after { content:''; position:absolute; border: 2.5px solid #fff; border-radius: 50%; top:50%; left:50%; transform: translate(-50%,-50%); }
+  .logo .mark::before { width: 7px; height: 7px; }
+  .logo .mark::after { width: 15px; height: 15px; opacity:.55; }
+  .back { font-family:'Archivo'; font-weight:700; font-size:.85rem; text-decoration:none; color: var(--signal-dark); }
+  .back:hover { color: var(--ink); }
+
+  .doc { padding: 56px 0 90px; }
+  .doc .kicker { font-family:'Archivo'; font-weight:700; font-size:.78rem; letter-spacing:.14em; text-transform:uppercase; color: var(--ink-soft); }
+  .doc h1 { font-size: clamp(2.1rem, 5vw, 3rem); font-weight: 900; margin: 10px 0 6px; }
+  .doc .updated { color: var(--ink-soft); font-size: .92rem; margin-bottom: 36px; }
+  .doc h2 { font-size: 1.25rem; font-weight: 800; margin: 34px 0 12px; }
+  .doc p, .doc li { color: var(--ink-soft); margin-bottom: 14px; font-size: 1rem; }
+  .doc ul { margin: 0 0 14px 24px; }
+  .doc li { margin-bottom: 8px; }
+  .doc strong { color: var(--ink); }
+  .doc a { color: var(--signal-dark); }
+  .callout { background: var(--paper-card); border: 1px solid var(--line); border-left: 4px solid var(--signal); border-radius: 8px; padding: 18px 20px; margin: 26px 0; }
+  .callout p { margin-bottom: 0; }
+
+  footer.site { background: var(--ink); color: #c2c8d0; padding: 40px 0; }
+  footer.site .wrap { max-width: 1080px; }
+  footer.site a { color:#c2c8d0; text-decoration:none; margin-right: 18px; font-size:.9rem; }
+  footer.site a:hover { color:#fff; }
+  footer.site .legal { margin-top: 18px; padding-top: 18px; border-top: 1px solid #2a2f36; font-size: .8rem; color:#8a929c; max-width: 75ch; }
+</style>
 </head>
 <body>
-    <div class="container">
-        <div class="nav"><a href="index.html">&larr; Back to CrewSignal</a></div>
 
-        <h1>SMS Terms & Messaging</h1>
-        <p><strong>Effective Date:</strong> June 15, 2026</p>
+<header class="bar">
+  <div class="bar-inner">
+    <a class="logo" href="/index.html"><span class="mark"></span>CrewSignal</a>
+    <a class="back" href="/index.html">&larr; Back to CrewSignal</a>
+  </div>
+</header>
 
-        <p>CrewSignal uses SMS (text message) technology to deliver transactional review requests. This page explains how our messaging works and your rights and obligations.</p>
+<section class="doc">
+  <div class="wrap">
+    <div class="kicker">Legal</div>
+    <h1>SMS Terms &amp; Messaging</h1>
+    <p class="updated">Effective Date: June 15, 2026</p>
 
-        <h2>1. Message Types & Frequency</h2>
-        <p>CrewSignal sends <strong>one automated SMS message per completed service event</strong>. This message contains a personalized review request with a direct link to leave a Google review for the service business that completed the work. Message frequency is tied directly to completed service events — there is no promotional or marketing messaging, and no unsolicited communications will be sent.</p>
+    <p>CrewSignal uses SMS (text message) technology to deliver transactional review requests. This page explains how our messaging works and your rights and obligations.</p>
 
-        <h2>2. Message & Data Rates</h2>
-        <p><strong>Message and data rates may apply.</strong> Standard SMS rates from your mobile carrier apply to all messages you receive from CrewSignal. Check your mobile plan to understand the charges that may apply. CrewSignal does not charge you for receiving review request messages.</p>
+    <h2>1. Message Types &amp; Frequency</h2>
+    <p>CrewSignal sends <strong>one automated SMS message per completed service event</strong>. This message contains a personalized review request with a direct link to leave a Google review for the service business that completed the work. Message frequency is tied directly to completed service events — there is no promotional or marketing messaging, and no unsolicited communications will be sent.</p>
 
-        <h2>3. How to Opt Out</h2>
-        <p>You may stop receiving text messages from CrewSignal at any time by replying <strong>STOP</strong> to any message you receive from us. Once you reply STOP, you will not receive any further messages from CrewSignal. Your opt-out request is immediate and permanent.</p>
-
-        <h2>4. How to Get Help</h2>
-        <p>For support or questions about messages you receive from CrewSignal, reply <strong>HELP</strong> to any message, or contact the business that requested the review directly. They can provide additional context about the message or address any concerns.</p>
-
-        <h2>5. Support Contact</h2>
-        <p>If you have questions about CrewSignal's SMS practices or this policy, you may contact us at <strong>hello@getcrewsignal.com</strong>.</p>
-
-        <h2>6. Carrier Compliance</h2>
-        <p>CrewSignal uses a carrier-registered 10-digit long code (10DLC) for all SMS delivery. This registration ensures compliance with U.S. wireless carrier requirements and reduces the likelihood of message filtering or blocking. All messaging strictly adheres to TCPA (Telephone Consumer Protection Act) regulations.</p>
+    <h2>2. Message &amp; Data Rates</h2>
+    <div class="callout">
+      <p><strong>Message and data rates may apply.</strong> Standard SMS rates from your mobile carrier apply to all messages you receive from CrewSignal. Check your mobile plan to understand the charges that may apply. CrewSignal does not charge you for receiving review request messages.</p>
     </div>
+
+    <h2>3. How to Opt Out</h2>
+    <p>You may stop receiving text messages from CrewSignal at any time by replying <strong>STOP</strong> to any message you receive from us. Once you reply STOP, you will not receive any further messages from CrewSignal. Your opt-out request is immediate and permanent.</p>
+
+    <h2>4. How to Get Help</h2>
+    <p>For support or questions about messages you receive from CrewSignal, reply <strong>HELP</strong> to any message, or contact the business that requested the review directly. They can provide additional context about the message or address any concerns.</p>
+
+    <h2>5. Support Contact</h2>
+    <p>If you have questions about CrewSignal's SMS practices or this policy, you may contact us at <strong>hello@getcrewsignal.com</strong>.</p>
+
+    <h2>6. Carrier Compliance</h2>
+    <p>CrewSignal uses a carrier-registered 10-digit long code (10DLC) for all SMS delivery. This registration ensures compliance with U.S. wireless carrier requirements and reduces the likelihood of message filtering or blocking. All messaging strictly adheres to TCPA (Telephone Consumer Protection Act) regulations.</p>
+  </div>
+</section>
+
+<footer class="site">
+  <div class="wrap">
+    <nav>
+      <a href="/index.html">Home</a>
+      <a href="/privacy.html">Privacy Policy</a>
+      <a href="/terms.html">Terms &amp; Conditions</a>
+      <a href="/sms-terms.html">SMS Terms</a>
+    </nav>
+    <p class="legal">© 2026 CrewSignal, a service of Brandon Myles (sole proprietor), Tennessee, USA. Contact: hello@getcrewsignal.com</p>
+  </div>
+</footer>
+
 </body>
 </html>

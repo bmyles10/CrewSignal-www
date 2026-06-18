@@ -1,94 +1,428 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CrewSignal | Automated Reputation Management</title>
-    <style>
-        :root {
-            --bg: #f1f5f9;
-            --surface: #ffffff;
-            --text-main: #0f172a;
-            --text-muted: #475569;
-            --border: #94a3b8;
-            --primary: #0284c7; 
-            --primary-hover: #0369a1;
-        }
-        body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; background: var(--bg); color: var(--text-main); line-height: 1.6; margin: 0; padding: 20px; }
-        .container { max-width: 650px; margin: 40px auto; }
-        .header { border-bottom: 3px solid var(--text-main); padding-bottom: 20px; margin-bottom: 30px; }
-        .brand { font-size: 2.8rem; font-weight: 900; letter-spacing: -0.05em; text-transform: uppercase; color: var(--text-main); line-height: 1; }
-        .brand span { color: var(--primary); }
-        .tagline { font-size: 1.1rem; color: var(--text-muted); font-weight: 600; margin-top: 10px; }
-        .card { background: var(--surface); border: 2px solid var(--border); padding: 30px; margin-bottom: 30px; border-radius: 4px; box-shadow: 4px 4px 0px rgba(148, 163, 184, 0.3); }
-        h2 { margin-top: 0; font-size: 1.4rem; border-bottom: 2px solid var(--bg); padding-bottom: 10px; text-transform: uppercase; letter-spacing: 0.05em; }
-        .workflow-box { background: var(--bg); border-left: 4px solid var(--primary); padding: 15px; font-family: monospace; font-size: 0.95rem; margin: 20px 0; color: var(--text-main); }
-        .form-group { margin-bottom: 20px; }
-        label { display: block; font-weight: 700; font-size: 0.85rem; margin-bottom: 8px; text-transform: uppercase; color: var(--text-muted); }
-        input { width: 100%; padding: 12px; border: 2px solid var(--border); border-radius: 4px; font-size: 1rem; box-sizing: border-box; font-family: inherit; transition: border-color 0.2s; }
-        input:focus { outline: none; border-color: var(--primary); }
-        button { background: var(--primary); color: white; border: none; padding: 16px 20px; font-size: 1rem; font-weight: bold; width: 100%; cursor: pointer; text-transform: uppercase; letter-spacing: 0.05em; border-radius: 4px; transition: background 0.2s; }
-        button:hover { background: var(--primary-hover); }
-        .disclaimer { font-size: 0.75rem; color: var(--text-muted); margin-top: 20px; border-top: 1px solid var(--bg); padding-top: 15px; line-height: 1.5; }
-        footer { text-align: center; font-size: 0.85rem; color: var(--text-muted); margin-top: 40px; padding-top: 20px; border-top: 1px solid var(--border); }
-        footer a { color: var(--primary); text-decoration: none; font-weight: 600; margin: 0 10px; }
-        footer a:hover { text-decoration: underline; }
-        .legal-text { margin-top: 15px; font-size: 0.75rem; }
-    </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CrewSignal — More Google Reviews. Zero Follow-Up.</title>
+<meta name="description" content="CrewSignal automatically sends a Google review request by text after every completed job. Built for contractors and service businesses. Works with Jobber, Square Appointments coming soon.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;600;700;800;900&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --ink: #16191d;
+    --ink-soft: #3d444d;
+    --paper: #f4f1ea;
+    --paper-card: #fbfaf6;
+    --line: #d9d3c6;
+    --signal: #ff5a1f;       /* safety-orange, the field accent */
+    --signal-dark: #e0440c;
+    --steel: #1f6feb;        /* trust blue, used sparingly */
+    --good: #1f7a44;
+    --shadow: 0 1px 0 rgba(0,0,0,.04), 0 8px 28px -18px rgba(0,0,0,.35);
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body {
+    font-family: 'Inter', system-ui, sans-serif;
+    color: var(--ink);
+    background: var(--paper);
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+  }
+  h1,h2,h3,.display { font-family: 'Archivo', system-ui, sans-serif; letter-spacing: -0.02em; line-height: 1.02; }
+  .wrap { max-width: 1080px; margin: 0 auto; padding: 0 24px; }
+  a { color: inherit; }
+
+  /* ---- top bar ---- */
+  header.bar {
+    position: sticky; top: 0; z-index: 50;
+    background: rgba(244,241,234,.88);
+    backdrop-filter: blur(8px);
+    border-bottom: 1px solid var(--line);
+  }
+  .bar-inner { display: flex; align-items: center; justify-content: space-between; height: 64px; }
+  .logo { font-family: 'Archivo'; font-weight: 900; font-size: 1.35rem; letter-spacing: -0.04em; display:flex; align-items:center; gap:9px; }
+  .logo .mark {
+    width: 26px; height: 26px; border-radius: 6px;
+    background: var(--signal); position: relative; flex: none;
+    box-shadow: inset 0 0 0 2px rgba(0,0,0,.08);
+  }
+  .logo .mark::before, .logo .mark::after {
+    content:''; position:absolute; border: 2.5px solid #fff; border-radius: 50%;
+    top:50%; left:50%; transform: translate(-50%,-50%);
+  }
+  .logo .mark::before { width: 7px; height: 7px; }
+  .logo .mark::after { width: 15px; height: 15px; opacity:.55; }
+  nav.links { display: flex; gap: 28px; align-items: center; font-size: .94rem; font-weight: 500; }
+  nav.links a { text-decoration: none; color: var(--ink-soft); }
+  nav.links a:hover { color: var(--ink); }
+  .btn {
+    display: inline-block; background: var(--signal); color: #fff; text-decoration: none;
+    font-weight: 700; font-family:'Archivo'; padding: 11px 20px; border-radius: 8px;
+    border: none; cursor: pointer; font-size: .95rem; transition: transform .08s ease, background .15s ease;
+    box-shadow: 0 1px 0 rgba(0,0,0,.12);
+  }
+  .btn:hover { background: var(--signal-dark); transform: translateY(-1px); }
+  .btn.ghost { background: transparent; color: var(--ink); box-shadow: inset 0 0 0 1.5px var(--ink); }
+  .btn.ghost:hover { background: var(--ink); color: var(--paper); }
+  @media (max-width: 720px){ nav.links a:not(.btn){ display:none; } }
+
+  /* ---- hero ---- */
+  .hero { padding: 76px 0 36px; }
+  .eyebrow {
+    display:inline-flex; align-items:center; gap:8px; font-family:'Archivo'; font-weight:700;
+    font-size:.74rem; letter-spacing:.14em; text-transform:uppercase; color: var(--signal-dark);
+    background: #fde7dc; border:1px solid #f6c9b3; padding:5px 11px; border-radius: 100px; margin-bottom: 22px;
+  }
+  .hero h1 { font-size: clamp(2.6rem, 6vw, 4.4rem); font-weight: 900; max-width: 14ch; }
+  .hero h1 em { font-style: normal; color: var(--signal); }
+  .hero .sub { font-size: clamp(1.05rem, 2vw, 1.28rem); color: var(--ink-soft); max-width: 52ch; margin-top: 22px; }
+  .hero-cta { display:flex; gap:14px; margin-top: 34px; flex-wrap: wrap; }
+  .hero-note { margin-top:18px; font-size:.88rem; color: var(--ink-soft); }
+
+  /* ---- the text-message signature ---- */
+  .flow { display: grid; grid-template-columns: 1.1fr .9fr; gap: 48px; align-items: center; margin-top: 14px; }
+  @media (max-width: 860px){ .flow { grid-template-columns: 1fr; gap: 36px; } }
+  .phone {
+    background: var(--ink); border-radius: 26px; padding: 14px; box-shadow: var(--shadow);
+    max-width: 320px; margin: 0 auto; width: 100%;
+  }
+  .phone .screen { background: #0c0e11; border-radius: 16px; padding: 18px 14px 22px; }
+  .phone .top { display:flex; justify-content:space-between; align-items:center; color:#8a929c; font-size:.72rem; margin-bottom: 14px; padding: 0 4px; }
+  .bubble {
+    background: #26303a; color: #f1f4f7; border-radius: 16px 16px 16px 4px;
+    padding: 12px 14px; font-size: .9rem; line-height: 1.45; max-width: 88%;
+  }
+  .bubble .link { color: #5fb0ff; word-break: break-all; }
+  .bubble .stop { display:block; margin-top:8px; color:#8a929c; font-size:.76rem; }
+  .sender { color:#8a929c; font-size:.72rem; margin: 0 0 6px 4px; }
+  .reply { text-align:right; margin-top:10px; }
+  .reply .bubble { background: var(--steel); border-radius: 16px 16px 4px 16px; display:inline-block; color:#fff; }
+
+  /* ---- section scaffolding ---- */
+  section { padding: 64px 0; }
+  .sec-head { max-width: 60ch; margin-bottom: 40px; }
+  .sec-head .kicker { font-family:'Archivo'; font-weight:700; font-size:.78rem; letter-spacing:.14em; text-transform:uppercase; color: var(--ink-soft); }
+  .sec-head h2 { font-size: clamp(1.8rem, 3.5vw, 2.6rem); font-weight: 800; margin-top: 10px; }
+  .sec-head p { color: var(--ink-soft); margin-top: 12px; font-size: 1.05rem; }
+  .alt { background: var(--paper-card); border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
+
+  /* ---- how it works: a real sequence, so numbered is honest ---- */
+  .steps { display: grid; grid-template-columns: repeat(4, 1fr); gap: 18px; }
+  @media (max-width: 860px){ .steps { grid-template-columns: 1fr 1fr; } }
+  @media (max-width: 480px){ .steps { grid-template-columns: 1fr; } }
+  .step { background: var(--paper-card); border:1px solid var(--line); border-radius: 12px; padding: 22px; position: relative; }
+  .step .n { font-family:'Archivo'; font-weight:900; font-size:1.1rem; color:#fff; background:var(--ink); width:30px; height:30px; border-radius:7px; display:flex; align-items:center; justify-content:center; margin-bottom:14px; }
+  .step h3 { font-size: 1.05rem; font-weight: 700; }
+  .step p { color: var(--ink-soft); font-size: .92rem; margin-top: 6px; }
+
+  /* ---- who it's for ---- */
+  .who { display:grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+  @media (max-width: 720px){ .who { grid-template-columns: 1fr; } }
+  .who-card { border:1px solid var(--line); border-radius:14px; padding:28px; background: var(--paper-card); }
+  .who-card h3 { font-size:1.25rem; font-weight:800; }
+  .who-card .tag { font-family:'Archivo'; font-weight:700; font-size:.72rem; letter-spacing:.12em; text-transform:uppercase; color: var(--signal-dark); }
+  .who-card ul { list-style:none; margin-top:14px; }
+  .who-card li { padding:6px 0 6px 26px; position:relative; color: var(--ink-soft); font-size:.96rem; }
+  .who-card li::before { content:''; position:absolute; left:2px; top:13px; width:10px; height:10px; border-radius:3px; background: var(--signal); }
+
+  /* ---- trust strip ---- */
+  .trust { display:flex; flex-wrap:wrap; gap:14px; }
+  .trust .chip {
+    font-family:'Archivo'; font-weight:600; font-size:.86rem; color: var(--ink);
+    background: var(--paper-card); border:1px solid var(--line); padding:9px 15px; border-radius:100px;
+    display:inline-flex; align-items:center; gap:8px;
+  }
+  .trust .chip .dot { width:8px; height:8px; border-radius:50%; background: var(--good); }
+  .trust .chip.soon .dot { background:#c79100; }
+
+  /* ---- pricing ---- */
+  .tiers { display:grid; grid-template-columns: repeat(3,1fr); gap: 20px; }
+  @media (max-width: 860px){ .tiers { grid-template-columns: 1fr; max-width:420px; margin:0 auto; } }
+  .tier { border:1px solid var(--line); border-radius:16px; padding:28px; background: var(--paper-card); display:flex; flex-direction:column; }
+  .tier.feature { border:2px solid var(--signal); box-shadow: var(--shadow); position:relative; }
+  .tier.feature .ribbon { position:absolute; top:-12px; left:28px; background:var(--signal); color:#fff; font-family:'Archivo'; font-weight:700; font-size:.72rem; letter-spacing:.08em; text-transform:uppercase; padding:4px 12px; border-radius:100px; }
+  .tier .name { font-family:'Archivo'; font-weight:800; font-size:1.15rem; }
+  .tier .price { font-family:'Archivo'; font-weight:900; font-size:2.4rem; margin: 14px 0 2px; }
+  .tier .price span { font-size:1rem; font-weight:600; color: var(--ink-soft); }
+  .tier .setup { font-size:.9rem; color: var(--ink-soft); }
+  .tier ul { list-style:none; margin:18px 0 24px; flex:1; }
+  .tier li { padding:7px 0 7px 24px; position:relative; font-size:.94rem; color: var(--ink-soft); }
+  .tier li::before { content:'✓'; position:absolute; left:0; color: var(--good); font-weight:800; }
+  .tier .btn { text-align:center; }
+
+  /* ---- FAQ ---- */
+  .faq details { border-bottom:1px solid var(--line); padding: 18px 0; }
+  .faq summary { font-family:'Archivo'; font-weight:700; font-size:1.05rem; cursor:pointer; list-style:none; display:flex; justify-content:space-between; align-items:center; gap:16px; }
+  .faq summary::-webkit-details-marker { display:none; }
+  .faq summary::after { content:'+'; font-weight:700; color: var(--signal); font-size:1.4rem; flex:none; }
+  .faq details[open] summary::after { content:'–'; }
+  .faq p { color: var(--ink-soft); margin-top:12px; font-size:.98rem; max-width:70ch; }
+
+  /* ---- contact ---- */
+  .contact-grid { display:grid; grid-template-columns: 1fr 1fr; gap:44px; align-items:start; }
+  @media (max-width: 760px){ .contact-grid { grid-template-columns:1fr; gap:32px; } }
+  form .row { margin-bottom:16px; }
+  label { display:block; font-family:'Archivo'; font-weight:600; font-size:.85rem; margin-bottom:6px; }
+  input, textarea {
+    width:100%; padding:12px 14px; border:1px solid var(--line); border-radius:9px; background:#fff;
+    font-family:'Inter'; font-size:1rem; color:var(--ink);
+  }
+  input:focus, textarea:focus { outline:2px solid var(--signal); border-color:transparent; }
+  .consent { font-size:.78rem; color: var(--ink-soft); line-height:1.5; margin-top:6px; }
+  form .btn { width:100%; margin-top:6px; padding:13px; }
+
+  /* ---- footer ---- */
+  footer.site { background: var(--ink); color: #c2c8d0; padding: 48px 0 36px; }
+  footer.site .cols { display:flex; justify-content:space-between; flex-wrap:wrap; gap:28px; }
+  footer.site .logo { color:#fff; }
+  footer.site a { color:#c2c8d0; text-decoration:none; }
+  footer.site a:hover { color:#fff; }
+  footer.site nav { display:flex; gap:22px; flex-wrap:wrap; font-size:.92rem; }
+  footer.site .legal { margin-top:30px; padding-top:22px; border-top:1px solid #2a2f36; font-size:.82rem; color:#8a929c; max-width:75ch; }
+  @media (prefers-reduced-motion: reduce){ * { scroll-behavior:auto; transition:none !important; } }
+</style>
 </head>
 <body>
-    <div class="container">
-        <div class="header">
-            <div class="brand">Crew<span>Signal</span></div>
-            <div class="tagline">Automated Google Reviews for Field Service Contractors & Salons.</div>
-        </div>
 
-        <div class="card">
-            <h2>Platform Operations</h2>
-            <p>CrewSignal integrates directly into your existing dispatch or appointment software. When a service professional marks a job as "Complete," our system automates a single, transaction-based SMS invitation to the client's verified mobile number.</p>
-            <div class="workflow-box">
-                "Hi [Customer Name], thanks for choosing [Business Name] today! We would value your feedback. Take 30 seconds to review our team here: [Review URL]. Reply STOP to opt out."
-            </div>
-            <p style="font-size: 0.85rem; color: var(--text-muted); margin-bottom: 0;">
-                <em>* SMS messaging is strictly transactional. Message frequency is exactly one notification per completed service event.</em>
-            </p>
-        </div>
+<header class="bar">
+  <div class="wrap bar-inner">
+    <div class="logo"><span class="mark"></span>CrewSignal</div>
+    <nav class="links">
+      <a href="#how">How it works</a>
+      <a href="#who">Who it's for</a>
+      <a href="#pricing">Pricing</a>
+      <a href="#faq">FAQ</a>
+      <a href="#contact" class="btn">Request a demo</a>
+    </nav>
+  </div>
+</header>
 
-        <div class="card">
-            <h2>Request Platform Access</h2>
-            <!-- Replace YOUR_FORM_ID with your actual Formspree hash -->
-            <form action="https://formspree.io/f/xbdewalg" method="POST">
-                <div class="form-group">
-                    <label for="name">Full Name</label>
-                    <input type="text" id="name" name="name" required placeholder="John Doe">
-                </div>
-                <div class="form-group">
-                    <label for="email">Business Email</label>
-                    <input type="email" id="email" name="email" required placeholder="john@company.com">
-                </div>
-                <div class="form-group">
-                    <label for="phone">Mobile Phone Number</label>
-                    <input type="tel" id="phone" name="phone" required placeholder="(555) 555-5555">
-                </div>
-                <button type="submit">Join the Beta Waitlist</button>
-                
-                <div class="disclaimer">
-                    <strong>SMS Consent:</strong> By clicking "Join the Beta Waitlist" or providing your phone number, you explicitly agree to receive automated SMS updates, notifications, and account alerts from CrewSignal. Message and data rates may apply. Messaging frequency varies based on account activity. You can opt out at any time by replying <strong>STOP</strong>. No mobile information will be shared with third parties or affiliates for marketing or promotional purposes.
-                </div>
-            </form>
+<!-- HERO -->
+<section class="hero">
+  <div class="wrap">
+    <span class="eyebrow">★ Automated reputation for the trades</span>
+    <div class="flow">
+      <div>
+        <h1>More Google reviews. <em>Zero follow-up.</em></h1>
+        <p class="sub">CrewSignal sends a friendly review request by text the moment a job is marked complete in your software — so every happy customer becomes a Google review, without anyone in the office lifting a finger.</p>
+        <div class="hero-cta">
+          <a href="#contact" class="btn">Request a demo</a>
+          <a href="#how" class="btn ghost">See how it works</a>
         </div>
+        <p class="hero-note">Built for contractors &amp; service businesses · Works with Jobber · TCPA-compliant messaging</p>
+      </div>
 
-        <footer>
-            <div>
-                <a href="privacy.html">Privacy Policy</a>
-                <a href="terms.html">Terms & Conditions</a>
-                <a href="sms-terms.html">SMS Terms & Conditions</a>
-            </div>
-            <div class="legal-text">
-                &copy; 2026 Brandon Myles. All rights reserved.<br>
-                CrewSignal is a proprietary software platform operated by Brandon Myles in Spring Hill, TN.
-            </div>
-        </footer>
+      <!-- signature element: the actual text a customer receives -->
+      <div class="phone" role="img" aria-label="Example review request text message a customer receives">
+        <div class="screen">
+          <div class="top"><span>Messages</span><span>now</span></div>
+          <p class="sender">CrewSignal · (629) 289-1997</p>
+          <div class="bubble">
+            Hi Jordan, thanks for choosing Rutherford Roofing! We'd love your feedback — leave us a quick Google review here: <span class="link">g.page/r/rutherford</span>
+            <span class="stop">Reply STOP to opt out</span>
+          </div>
+          <div class="reply"><span class="bubble">Just left you 5 stars! ⭐️</span></div>
+        </div>
+      </div>
     </div>
+  </div>
+</section>
+
+<!-- HOW IT WORKS -->
+<section id="how" class="alt">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="kicker">How it works</div>
+      <h2>Four steps. One of them is yours.</h2>
+      <p>CrewSignal plugs into the software you already use to run jobs. After setup, the only step you do is the one you already do — finish the job.</p>
+    </div>
+    <div class="steps">
+      <div class="step"><div class="n">1</div><h3>Finish the job</h3><p>You mark the job complete in your CRM or booking app, exactly like you do today.</p></div>
+      <div class="step"><div class="n">2</div><h3>CrewSignal detects it</h3><p>Your software notifies CrewSignal automatically the instant the job closes.</p></div>
+      <div class="step"><div class="n">3</div><h3>Customer gets a text</h3><p>A branded, friendly review request goes out — with your Google link and an opt-out line.</p></div>
+      <div class="step"><div class="n">4</div><h3>Reviews roll in</h3><p>Happy customers tap the link and leave a review. Your rating climbs on its own.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- WHO IT'S FOR -->
+<section id="who">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="kicker">Who it's for</div>
+      <h2>If you finish jobs, you should be collecting reviews.</h2>
+    </div>
+    <div class="who">
+      <div class="who-card">
+        <span class="tag">Field service contractors</span>
+        <h3>Roofing, HVAC, plumbing &amp; more</h3>
+        <ul>
+          <li>Roofing, HVAC, electrical, plumbing</li>
+          <li>Landscaping, concrete, painting, pest control</li>
+          <li>2–30 trucks, already closing jobs digitally</li>
+          <li>Works with Jobber today</li>
+        </ul>
+      </div>
+      <div class="who-card">
+        <span class="tag">Service &amp; appointment businesses</span>
+        <h3>Salons, spas &amp; studios</h3>
+        <ul>
+          <li>Hair &amp; nail salons, barbershops, spas</li>
+          <li>Massage, personal training, tattoo studios</li>
+          <li>Anyone booking through appointment software</li>
+          <li>Square Appointments support coming soon</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TRUST -->
+<section class="alt" style="padding:44px 0;">
+  <div class="wrap trust">
+    <span class="chip"><span class="dot"></span>TCPA-compliant messaging</span>
+    <span class="chip"><span class="dot"></span>Every text includes STOP opt-out</span>
+    <span class="chip"><span class="dot"></span>Works with Jobber</span>
+    <span class="chip soon"><span class="dot"></span>Square Appointments — coming soon</span>
+    <span class="chip"><span class="dot"></span>Carrier-registered sending number</span>
+  </div>
+</section>
+
+<!-- PRICING -->
+<section id="pricing">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="kicker">Pricing</div>
+      <h2>Straightforward plans. No long contracts.</h2>
+      <p>Every plan includes setup, your dedicated sending number, and automatic review texts after each completed job.</p>
+    </div>
+    <div class="tiers">
+      <div class="tier feature">
+        <span class="ribbon">Limited — 10 spots only</span>
+        <div class="name">Founding Member</div>
+        <div class="price">$99<span>/mo</span></div>
+        <div class="setup">+ $299 one-time setup</div>
+        <ul>
+          <li>Rate locked for life as a founding client</li>
+          <li>One CRM connection</li>
+          <li>Automatic review texts</li>
+          <li>Branded message &amp; review link</li>
+          <li>Opt-out handling included</li>
+          <li>Direct founder support</li>
+        </ul>
+        <a href="#contact" class="btn">Claim a founding spot</a>
+      </div>
+      <div class="tier">
+        <div class="name">Professional</div>
+        <div class="price">$149<span>/mo</span></div>
+        <div class="setup">+ $499 one-time setup</div>
+        <ul>
+          <li>One CRM connection</li>
+          <li>Automatic review texts</li>
+          <li>Branded message &amp; review link</li>
+          <li>Opt-out handling included</li>
+          <li>Priority support</li>
+          <li>Delivery monitoring</li>
+        </ul>
+        <a href="#contact" class="btn ghost">Request a demo</a>
+      </div>
+      <div class="tier">
+        <div class="name">Multi-Location</div>
+        <div class="price">$299<span>/mo</span></div>
+        <div class="setup">+ $999 one-time setup</div>
+        <ul>
+          <li>Everything in Professional</li>
+          <li>Multiple locations</li>
+          <li>Multiple sending numbers</li>
+          <li>White-glove onboarding</li>
+          <li>Dedicated support contact</li>
+        </ul>
+        <a href="#contact" class="btn ghost">Request a demo</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section id="faq" class="alt">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="kicker">FAQ</div>
+      <h2>Questions, answered plainly.</h2>
+    </div>
+    <div class="faq">
+      <details open><summary>Do I have to change how I work?</summary><p>No. You keep using the same software to run and close jobs. CrewSignal listens for the "job complete" signal from your CRM and handles the review request automatically. The only step you do is the one you already do.</p></details>
+      <details><summary>Which software do you work with?</summary><p>CrewSignal works with Jobber today, and Square Appointments support is coming soon. If you use a different system, get in touch — we add integrations based on what real customers actually use.</p></details>
+      <details><summary>Is text-message review collection allowed?</summary><p>Yes, when done correctly. CrewSignal uses a carrier-registered sending number, includes a clear opt-out ("Reply STOP") in every message, and honors every opt-out permanently. You're responsible for letting your customers know at the time you collect their number that they'll get a review request text — we cover this in our <a href="/terms.html" style="color:var(--signal-dark);">Terms</a> and <a href="/sms-terms.html" style="color:var(--signal-dark);">SMS Terms</a>.</p></details>
+      <details><summary>What does the text actually say?</summary><p>A short, friendly message with the customer's name, your business name, your Google review link, and an opt-out line. You can customize the wording so it sounds like you — not a corporate notification.</p></details>
+      <details><summary>Will my repeat customers get spammed every visit?</summary><p>No. CrewSignal sends exactly one review request per completed job or appointment — never more, even for customers who come back every few weeks. Duplicate job signals are automatically detected and ignored, so no one gets the same request twice.</p></details>
+      <details><summary>What does it cost to get started?</summary><p>We currently offer a Founding Member rate of $99/month with a $299 setup fee — limited to the first 10 clients, with that rate locked for life. After founding spots are filled, the standard plan is $149/month with a $499 setup fee. The setup covers connecting your software, configuring your sending number, and getting your message dialed in. See pricing above.</p></details>
+      <details><summary>How fast can I be up and running?</summary><p>Most setups take a few days, mostly waiting on carrier registration for your sending number. Once that clears, reviews start flowing after your very next completed job.</p></details>
+      <details><summary>What if I don't have a Google Business Profile yet?</summary><p>No problem — a lot of contractors don't. We'll walk you through setting one up in about 5 minutes as part of onboarding. <a href="/google-setup-guide.html" style="color:var(--signal-dark);">See the setup guide here</a>.</p></details>
+      <details><summary>Can I cancel?</summary><p>Yes. Plans are month-to-month with no long-term contract. Cancel anytime; details are in our Terms.</p></details>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+  <div class="wrap contact-grid">
+    <div>
+      <div class="sec-head" style="margin-bottom:18px;">
+        <div class="kicker">Get started</div>
+        <h2>Request a demo</h2>
+        <p>Tell us a bit about your business and we'll show you exactly how CrewSignal works for your trade. No pressure, no jargon.</p>
+      </div>
+      <p style="color:var(--ink-soft); font-size:.96rem;">Prefer email? Reach us at <a href="mailto:hello@getcrewsignal.com" style="color:var(--signal-dark); font-weight:600;">hello@getcrewsignal.com</a></p>
+    </div>
+    <div>
+      <!-- Formspree: replace FORM_ID after creating the form -->
+      <form action="https://formspree.io/f/FORM_ID" method="POST">
+        <div class="row">
+          <label for="name">Your name</label>
+          <input type="text" id="name" name="name" required placeholder="Jordan Rutherford">
+        </div>
+        <div class="row">
+          <label for="business">Business name</label>
+          <input type="text" id="business" name="business" required placeholder="Rutherford Roofing">
+        </div>
+        <div class="row">
+          <label for="email">Business email</label>
+          <input type="email" id="email" name="email" required placeholder="you@yourcompany.com">
+        </div>
+        <div class="row">
+          <label for="software">What software do you use to track jobs?</label>
+          <input type="text" id="software" name="software" placeholder="Jobber, Square, QuickBooks, not sure…">
+        </div>
+        <button type="submit" class="btn">Request a demo</button>
+        <p class="consent">This form requests a product demo only. CrewSignal does not send marketing texts to you. By submitting, you agree we may contact you about your request by email or phone. See our <a href="/privacy.html" style="color:var(--signal-dark);">Privacy Policy</a>.</p>
+      </form>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="site">
+  <div class="wrap">
+    <div class="cols">
+      <div class="logo"><span class="mark"></span>CrewSignal</div>
+      <nav>
+        <a href="#how">How it works</a>
+        <a href="#pricing">Pricing</a>
+        <a href="#faq">FAQ</a>
+        <a href="#contact">Request a demo</a>
+        <a href="/privacy.html">Privacy Policy</a>
+        <a href="/terms.html">Terms &amp; Conditions</a>
+        <a href="/sms-terms.html">SMS Terms</a>
+      </nav>
+    </div>
+    <p class="legal">
+      © 2026 CrewSignal, a service of Brandon Myles (sole proprietor), Tennessee, USA. CrewSignal sends review-request text messages on behalf of service businesses to their own customers following a completed job. Every message includes opt-out instructions ("Reply STOP"). Message and data rates may apply. Contact: hello@getcrewsignal.com
+    </p>
+  </div>
+</footer>
+
 </body>
 </html>

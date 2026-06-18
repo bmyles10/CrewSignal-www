@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Google Business Profile Setup — 5 Minutes | CrewSignal</title>
+<meta name="description" content="A simple 5-minute guide to setting up your Google Business Profile so CrewSignal can start collecting reviews for you.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;600;700;800;900&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --ink: #16191d; --ink-soft: #3d444d; --paper: #f4f1ea; --paper-card: #fbfaf6;
+    --line: #d9d3c6; --signal: #ff5a1f; --signal-dark: #e0440c; --steel: #1f6feb; --good: #1f7a44;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body { font-family: 'Inter', system-ui, sans-serif; color: var(--ink); background: var(--paper); line-height: 1.7; -webkit-font-smoothing: antialiased; }
+  h1,h2,h3,.logo { font-family: 'Archivo', system-ui, sans-serif; letter-spacing: -0.02em; }
+  .wrap { max-width: 760px; margin: 0 auto; padding: 0 24px; }
+  a { color: inherit; }
+
+  header.bar { position: sticky; top: 0; z-index: 50; background: rgba(244,241,234,.88); backdrop-filter: blur(8px); border-bottom: 1px solid var(--line); }
+  .bar-inner { max-width: 1080px; margin: 0 auto; padding: 0 24px; display: flex; align-items: center; justify-content: space-between; height: 64px; }
+  .logo { font-weight: 900; font-size: 1.35rem; letter-spacing: -0.04em; display:flex; align-items:center; gap:9px; text-decoration: none; color: var(--ink); }
+  .logo .mark { width: 26px; height: 26px; border-radius: 6px; background: var(--signal); position: relative; flex: none; box-shadow: inset 0 0 0 2px rgba(0,0,0,.08); }
+  .logo .mark::before, .logo .mark::after { content:''; position:absolute; border: 2.5px solid #fff; border-radius: 50%; top:50%; left:50%; transform: translate(-50%,-50%); }
+  .logo .mark::before { width: 7px; height: 7px; }
+  .logo .mark::after { width: 15px; height: 15px; opacity:.55; }
+  .back { font-family:'Archivo'; font-weight:700; font-size:.85rem; text-decoration:none; color: var(--signal-dark); }
+  .back:hover { color: var(--ink); }
+
+  .doc { padding: 56px 0 90px; }
+  .doc .kicker { font-family:'Archivo'; font-weight:700; font-size:.78rem; letter-spacing:.14em; text-transform:uppercase; color: var(--ink-soft); }
+  .doc h1 { font-size: clamp(2.1rem, 5vw, 3rem); font-weight: 900; margin: 10px 0 6px; }
+  .doc .sub { color: var(--ink-soft); font-size: 1.1rem; margin-bottom: 30px; }
+  .doc strong { color: var(--ink); }
+  .doc a { color: var(--signal-dark); }
+
+  .callout { background: #fff8f3; border: 1px solid var(--line); border-left: 4px solid var(--signal); border-radius: 8px; padding: 18px 20px; margin: 0 0 36px; }
+  .callout p { margin: 0; color: var(--ink-soft); font-size: .98rem; }
+
+  .step { display: flex; gap: 18px; padding: 26px 0; border-bottom: 1px solid var(--line); }
+  .step:last-of-type { border-bottom: none; }
+  .step .n { font-family:'Archivo'; font-weight:900; font-size:1.05rem; color:#fff; background: var(--ink); width: 36px; height: 36px; border-radius: 50%; display:flex; align-items:center; justify-content:center; flex: none; }
+  .step .body h3 { font-size: 1.1rem; font-weight: 800; margin-bottom: 8px; }
+  .step .body p { color: var(--ink-soft); margin-bottom: 10px; font-size: .98rem; }
+  .step .body p:last-child { margin-bottom: 0; }
+
+  .done { background: #e8f3ec; border: 2px solid var(--good); border-radius: 10px; padding: 22px; margin-top: 36px; text-align: center; }
+  .done p { margin: 0; font-weight: 700; color: var(--good); font-family: 'Archivo'; }
+
+  .help { margin-top: 36px; padding-top: 24px; border-top: 1px solid var(--line); font-size: .95rem; color: var(--ink-soft); }
+
+  footer.site { background: var(--ink); color: #c2c8d0; padding: 40px 0; }
+  footer.site .wrap { max-width: 1080px; }
+  footer.site a { color:#c2c8d0; text-decoration:none; margin-right: 18px; font-size:.9rem; }
+  footer.site a:hover { color:#fff; }
+  footer.site .legal { margin-top: 18px; padding-top: 18px; border-top: 1px solid #2a2f36; font-size: .8rem; color:#8a929c; max-width: 75ch; }
+</style>
+</head>
+<body>
+
+<header class="bar">
+  <div class="bar-inner">
+    <a class="logo" href="/index.html"><span class="mark"></span>CrewSignal</a>
+    <a class="back" href="/index.html">&larr; Back to CrewSignal</a>
+  </div>
+</header>
+
+<section class="doc">
+  <div class="wrap">
+    <div class="kicker">Onboarding Guide</div>
+    <h1>Google Business Profile setup</h1>
+    <p class="sub">Get your business on Google in about 5 minutes. No tech experience needed.</p>
+
+    <div class="callout">
+      <p><strong>Why this matters:</strong> When homeowners search for your service (e.g., "roofer near me"), Google only shows your business if you have a profile. More reviews on that profile means higher placement in search results, which means more calls. CrewSignal sends review requests automatically — but you need a profile first for those reviews to actually show up.</p>
+    </div>
+
+    <div class="step">
+      <div class="n">1</div>
+      <div class="body">
+        <h3>Go to Google Business Profile</h3>
+        <p>On your phone or computer, go to <strong>google.com/business</strong> and click <strong>"Manage my business"</strong> (or <strong>"Create a business"</strong> if you don't have one yet).</p>
+        <p>Sign in with your personal Google account (Gmail, or create one if you don't have it).</p>
+      </div>
+    </div>
+
+    <div class="step">
+      <div class="n">2</div>
+      <div class="body">
+        <h3>Enter your business info</h3>
+        <p><strong>Business name:</strong> What you want to appear on Google (e.g., "Mike's Roofing").</p>
+        <p><strong>Category:</strong> Pick the one that matches you (e.g., "Roofing Contractor" or "Hair Salon").</p>
+        <p><strong>Service area:</strong> The city or cities where you work.</p>
+        <p><strong>Phone number:</strong> Your business line — can be your personal cell.</p>
+        <p><strong>Website (optional):</strong> Leave blank if you don't have one. You can add it later.</p>
+      </div>
+    </div>
+
+    <div class="step">
+      <div class="n">3</div>
+      <div class="body">
+        <h3>Verify your business</h3>
+        <p><strong>Phone verification</strong> is fastest: click the phone icon, Google calls your number with a code, you enter it. Done in 30 seconds.</p>
+        <p>(Mail verification takes 1–2 weeks — skip it unless phone doesn't work for you.)</p>
+      </div>
+    </div>
+
+    <div class="step">
+      <div class="n">4</div>
+      <div class="body">
+        <h3>Add your review link</h3>
+        <p>After verification, find the <strong>"Reviews"</strong> section on the left side of your profile.</p>
+        <p>Click the three dots (...) next to it and select <strong>"Get reviews link"</strong> (or "Share your profile"). Copy that link.</p>
+      </div>
+    </div>
+
+    <div class="step">
+      <div class="n">5</div>
+      <div class="body">
+        <h3>Paste your link into CrewSignal</h3>
+        <p>In your CrewSignal onboarding email, paste the link you copied into the <strong>"Google Review Link"</strong> field.</p>
+      </div>
+    </div>
+
+    <div class="done">
+      <p>Your profile is live. The next time you complete a job and mark it done, CrewSignal sends your customer a text with your review link.</p>
+    </div>
+
+    <p class="help"><strong>Stuck?</strong> Most of this is just following Google's prompts. Still confused? Email <strong>hello@getcrewsignal.com</strong> and we'll walk you through it.</p>
+  </div>
+</section>
+
+<footer class="site">
+  <div class="wrap">
+    <nav>
+      <a href="/index.html">Home</a>
+      <a href="/privacy.html">Privacy Policy</a>
+      <a href="/terms.html">Terms &amp; Conditions</a>
+      <a href="/sms-terms.html">SMS Terms</a>
+    </nav>
+    <p class="legal">© 2026 CrewSignal, a service of Brandon Myles (sole proprietor), Tennessee, USA. Contact: hello@getcrewsignal.com</p>
+  </div>
+</footer>
+
+</body>
+</html>

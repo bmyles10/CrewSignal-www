@@ -1,59 +1,118 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Terms & Conditions | CrewSignal</title>
-    <style>
-        :root { --bg: #f1f5f9; --surface: #ffffff; --text-main: #0f172a; --text-muted: #475569; --border: #94a3b8; --primary: #0284c7; }
-        body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; background: var(--bg); color: var(--text-main); line-height: 1.6; margin: 0; padding: 20px; }
-        .container { max-width: 650px; margin: 40px auto; background: var(--surface); border: 2px solid var(--border); padding: 40px; border-radius: 4px; box-shadow: 4px 4px 0px rgba(148, 163, 184, 0.3); }
-        h1 { margin-top: 0; border-bottom: 3px solid var(--text-main); padding-bottom: 10px; font-size: 2rem; text-transform: uppercase; }
-        h2 { font-size: 1.2rem; color: var(--primary); margin-top: 30px; text-transform: uppercase; }
-        p, li { font-size: 0.95rem; color: var(--text-muted); }
-        .nav { margin-bottom: 20px; font-weight: bold; }
-        .nav a { color: var(--primary); text-decoration: none; text-transform: uppercase; font-size: 0.85rem; }
-    </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Terms &amp; Conditions | CrewSignal</title>
+<meta name="description" content="CrewSignal Terms and Conditions for business clients using our automated SMS review-request service.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;600;700;800;900&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --ink: #16191d; --ink-soft: #3d444d; --paper: #f4f1ea; --paper-card: #fbfaf6;
+    --line: #d9d3c6; --signal: #ff5a1f; --signal-dark: #e0440c; --steel: #1f6feb; --good: #1f7a44;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body { font-family: 'Inter', system-ui, sans-serif; color: var(--ink); background: var(--paper); line-height: 1.7; -webkit-font-smoothing: antialiased; }
+  h1,h2,h3,.logo { font-family: 'Archivo', system-ui, sans-serif; letter-spacing: -0.02em; }
+  .wrap { max-width: 760px; margin: 0 auto; padding: 0 24px; }
+  a { color: inherit; }
+
+  header.bar { position: sticky; top: 0; z-index: 50; background: rgba(244,241,234,.88); backdrop-filter: blur(8px); border-bottom: 1px solid var(--line); }
+  .bar-inner { max-width: 1080px; margin: 0 auto; padding: 0 24px; display: flex; align-items: center; justify-content: space-between; height: 64px; }
+  .logo { font-weight: 900; font-size: 1.35rem; letter-spacing: -0.04em; display:flex; align-items:center; gap:9px; text-decoration: none; color: var(--ink); }
+  .logo .mark { width: 26px; height: 26px; border-radius: 6px; background: var(--signal); position: relative; flex: none; box-shadow: inset 0 0 0 2px rgba(0,0,0,.08); }
+  .logo .mark::before, .logo .mark::after { content:''; position:absolute; border: 2.5px solid #fff; border-radius: 50%; top:50%; left:50%; transform: translate(-50%,-50%); }
+  .logo .mark::before { width: 7px; height: 7px; }
+  .logo .mark::after { width: 15px; height: 15px; opacity:.55; }
+  .back { font-family:'Archivo'; font-weight:700; font-size:.85rem; text-decoration:none; color: var(--signal-dark); }
+  .back:hover { color: var(--ink); }
+
+  .doc { padding: 56px 0 90px; }
+  .doc .kicker { font-family:'Archivo'; font-weight:700; font-size:.78rem; letter-spacing:.14em; text-transform:uppercase; color: var(--ink-soft); }
+  .doc h1 { font-size: clamp(2.1rem, 5vw, 3rem); font-weight: 900; margin: 10px 0 6px; }
+  .doc .updated { color: var(--ink-soft); font-size: .92rem; margin-bottom: 36px; }
+  .doc h2 { font-size: 1.25rem; font-weight: 800; margin: 34px 0 12px; }
+  .doc p, .doc li { color: var(--ink-soft); margin-bottom: 14px; font-size: 1rem; }
+  .doc ul { margin: 0 0 14px 24px; }
+  .doc li { margin-bottom: 8px; }
+  .doc strong { color: var(--ink); }
+  .doc a { color: var(--signal-dark); }
+  .callout { background: var(--paper-card); border: 1px solid var(--line); border-left: 4px solid var(--signal); border-radius: 8px; padding: 18px 20px; margin: 26px 0; }
+  .callout p { margin-bottom: 0; }
+
+  footer.site { background: var(--ink); color: #c2c8d0; padding: 40px 0; }
+  footer.site .wrap { max-width: 1080px; }
+  footer.site a { color:#c2c8d0; text-decoration:none; margin-right: 18px; font-size:.9rem; }
+  footer.site a:hover { color:#fff; }
+  footer.site .legal { margin-top: 18px; padding-top: 18px; border-top: 1px solid #2a2f36; font-size: .8rem; color:#8a929c; max-width: 75ch; }
+</style>
 </head>
 <body>
-    <div class="container">
-        <div class="nav"><a href="index.html">&larr; Back to CrewSignal</a></div>
 
-        <h1>Terms & Conditions</h1>
-        <p><strong>Effective Date:</strong> June 16, 2026</p>
+<header class="bar">
+  <div class="bar-inner">
+    <a class="logo" href="/index.html"><span class="mark"></span>CrewSignal</a>
+    <a class="back" href="/index.html">&larr; Back to CrewSignal</a>
+  </div>
+</header>
 
-        <p>By accessing or using the CrewSignal service operated by Brandon Myles ("CrewSignal," "we," "us," or "our"), you ("the Business Client") agree to be bound by these Terms & Conditions.</p>
+<section class="doc">
+  <div class="wrap">
+    <div class="kicker">Legal</div>
+    <h1>Terms &amp; Conditions</h1>
+    <p class="updated">Effective Date: June 16, 2026</p>
 
-        <h2>1. Service Description</h2>
-        <p>CrewSignal provides an automated SMS platform designed to request reviews from customers immediately following a completed service event logged in a supported CRM or booking system. CrewSignal acts as a software integration layer between the Business Client's existing software and SMS delivery; CrewSignal does not initiate contact with any consumer except as triggered by the Business Client's own completion of a job or transaction.</p>
+    <p>By accessing or using the CrewSignal service operated by Brandon Myles ("CrewSignal," "we," "us," or "our"), you ("the Business Client") agree to be bound by these Terms &amp; Conditions.</p>
 
-        <h2>2. Consent &amp; TCPA Compliance</h2>
-        <p>The Business Client is solely responsible for obtaining valid consent from each of its own customers ("End Customers") prior to any message being sent through CrewSignal. As a condition of using the service, the Business Client expressly represents, warrants, and agrees that:</p>
-        <ul>
-            <li>The Business Client will <strong>clearly disclose to each End Customer, at the point of service (in person or by phone) when collecting their phone number, that the End Customer will receive a text message requesting a review after the job or appointment is complete.</strong></li>
-            <li>The Business Client has obtained the necessary prior express consent from each End Customer to send them SMS messages, in compliance with the Telephone Consumer Protection Act (TCPA) and all applicable federal and state laws.</li>
-            <li>The Business Client will only submit phone numbers of End Customers who have actually received the service and provided their number directly to the Business Client.</li>
-            <li>The Business Client will promptly honor and not attempt to circumvent any opt-out request.</li>
-        </ul>
-        <p>CrewSignal sends exactly one transactional review-request message per completed job or transaction. Every message includes opt-out instructions ("Reply STOP to opt out"). The Business Client's failure to obtain proper consent or to make the point-of-service disclosure described above is a material breach of these Terms.</p>
+    <h2>1. Service Description</h2>
+    <p>CrewSignal provides an automated SMS platform designed to request reviews from customers immediately following a completed service event logged in a supported CRM or booking system. CrewSignal acts as a software integration layer between the Business Client's existing software and SMS delivery; CrewSignal does not initiate contact with any consumer except as triggered by the Business Client's own completion of a job or transaction.</p>
 
-        <h2>3. SMS Communications (Account Notifications)</h2>
-        <p>If you, as a Business Client, provide your own phone number to us, you consent to receive SMS communications regarding your account and the service. Message frequency varies based on usage. Standard message and data rates may apply. You may opt out at any time by replying <strong>STOP</strong>. For assistance, reply <strong>HELP</strong>.</p>
-
-        <h2>4. Acceptable Use</h2>
-        <p>The service may only be used to request genuine reviews from real customers following a real completed service event. The Business Client may not use CrewSignal for marketing blasts, promotional campaigns, messaging to purchased or scraped lists, or any messaging to individuals who have not done business with the Business Client. Misuse will result in immediate termination.</p>
-
-        <h2>5. Limitation of Liability</h2>
-        <p>To the maximum extent permitted by law, Brandon Myles and CrewSignal shall not be liable for any indirect, incidental, or consequential damages resulting from the use or inability to use the service, including but not limited to any fines, penalties, or claims resulting from the Business Client's failure to obtain proper consent or otherwise comply with applicable SMS and consumer-protection laws. CrewSignal does not guarantee any specific number of reviews, ratings, or business outcomes.</p>
-
-        <h2>6. Cancellation</h2>
-        <p>Service is provided on a month-to-month basis with no long-term contract. Either party may cancel at any time. Setup fees are non-refundable once onboarding has begun.</p>
-
-        <h2>7. Governing Law</h2>
-        <p>These terms are governed by the laws of the State of Tennessee. Any disputes arising under these terms shall be subject to the exclusive jurisdiction of the state and federal courts located in Tennessee.</p>
-
-        <h2>8. Contact</h2>
-        <p>Questions about these Terms may be directed to <strong>hello@getcrewsignal.com</strong>.</p>
+    <h2>2. Consent &amp; TCPA Compliance</h2>
+    <p>The Business Client is solely responsible for obtaining valid consent from each of its own customers ("End Customers") prior to any message being sent through CrewSignal. As a condition of using the service, the Business Client expressly represents, warrants, and agrees that:</p>
+    <ul>
+      <li>The Business Client will <strong>clearly disclose to each End Customer, at the point of service (in person or by phone) when collecting their phone number, that the End Customer will receive a text message requesting a review after the job or appointment is complete.</strong></li>
+      <li>The Business Client has obtained the necessary prior express consent from each End Customer to send them SMS messages, in compliance with the Telephone Consumer Protection Act (TCPA) and all applicable federal and state laws.</li>
+      <li>The Business Client will only submit phone numbers of End Customers who have actually received the service and provided their number directly to the Business Client.</li>
+      <li>The Business Client will promptly honor and not attempt to circumvent any opt-out request.</li>
+    </ul>
+    <div class="callout">
+      <p>CrewSignal sends exactly one transactional review-request message per completed job or transaction. Every message includes opt-out instructions ("Reply STOP to opt out"). The Business Client's failure to obtain proper consent or to make the point-of-service disclosure described above is a material breach of these Terms.</p>
     </div>
+
+    <h2>3. SMS Communications (Account Notifications)</h2>
+    <p>If you, as a Business Client, provide your own phone number to us, you consent to receive SMS communications regarding your account and the service. Message frequency varies based on usage. Standard message and data rates may apply. You may opt out at any time by replying <strong>STOP</strong>. For assistance, reply <strong>HELP</strong>.</p>
+
+    <h2>4. Acceptable Use</h2>
+    <p>The service may only be used to request genuine reviews from real customers following a real completed service event. The Business Client may not use CrewSignal for marketing blasts, promotional campaigns, messaging to purchased or scraped lists, or any messaging to individuals who have not done business with the Business Client. Misuse will result in immediate termination.</p>
+
+    <h2>5. Limitation of Liability</h2>
+    <p>To the maximum extent permitted by law, Brandon Myles and CrewSignal shall not be liable for any indirect, incidental, or consequential damages resulting from the use or inability to use the service, including but not limited to any fines, penalties, or claims resulting from the Business Client's failure to obtain proper consent or otherwise comply with applicable SMS and consumer-protection laws. CrewSignal does not guarantee any specific number of reviews, ratings, or business outcomes.</p>
+
+    <h2>6. Cancellation</h2>
+    <p>Service is provided on a month-to-month basis with no long-term contract. Either party may cancel at any time. Setup fees are non-refundable once onboarding has begun.</p>
+
+    <h2>7. Governing Law</h2>
+    <p>These terms are governed by the laws of the State of Tennessee. Any disputes arising under these terms shall be subject to the exclusive jurisdiction of the state and federal courts located in Tennessee.</p>
+
+    <h2>8. Contact</h2>
+    <p>Questions about these Terms may be directed to <strong>hello@getcrewsignal.com</strong>.</p>
+  </div>
+</section>
+
+<footer class="site">
+  <div class="wrap">
+    <nav>
+      <a href="/index.html">Home</a>
+      <a href="/privacy.html">Privacy Policy</a>
+      <a href="/terms.html">Terms &amp; Conditions</a>
+      <a href="/sms-terms.html">SMS Terms</a>
+    </nav>
+    <p class="legal">© 2026 CrewSignal, a service of Brandon Myles (sole proprietor), Tennessee, USA. Contact: hello@getcrewsignal.com</p>
+  </div>
+</footer>
+
 </body>
 </html>
