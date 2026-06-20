@@ -380,6 +380,7 @@
     <div>
       <!-- Formspree: replace FORM_ID after creating the form -->
       <form action="https://formspree.io/f/FORM_ID" method="POST">
+        <input type="text" name="_gotcha" style="display:none">
         <div class="row">
           <label for="name">Your name</label>
           <input type="text" id="name" name="name" required placeholder="Jordan Rutherford">
@@ -397,7 +398,7 @@
           <input type="text" id="software" name="software" placeholder="Jobber, Square, QuickBooks, not sure…">
         </div>
         <button type="submit" class="btn">Request a demo</button>
-        <p class="consent">This form requests a product demo only. CrewSignal does not send marketing texts to you. By submitting, you agree we may contact you about your request by email or phone. See our <a href="/privacy.html" style="color:var(--signal-dark);">Privacy Policy</a>.</p>
+        <p class="consent">This form requests a product demo only. Submitting this form does not enroll you in promotional SMS campaigns. We'll only contact you regarding your demo request. By submitting, you agree we may contact you about your request by email or phone. See our <a href="/privacy.html" style="color:var(--signal-dark);">Privacy Policy</a>.</p>
       </form>
     </div>
   </div>
@@ -419,7 +420,7 @@
       </nav>
     </div>
     <p class="legal">
-      © 2026 CrewSignal, a service of Brandon Myles (sole proprietor), Tennessee, USA. CrewSignal sends review-request text messages on behalf of service businesses to their own customers following a completed job. Every message includes opt-out instructions ("Reply STOP"). Message and data rates may apply. Contact: hello@getcrewsignal.com
+      © 2026 CrewSignal, a service of Brandon Myles (sole proprietor), Tennessee, USA. CrewSignal sends review-request text messages on behalf of service businesses to their own customers following a completed job for customers who have consented to receive SMS communications from the business. Every message includes opt-out instructions ("Reply STOP"). Message and data rates may apply. Contact: hello@getcrewsignal.com
     </p>
   </div>
 </footer>
