@@ -1,0 +1,26 @@
+# CrewSignal
+
+CrewSignal is a software platform that helps small service businesses, such as contractors, salons, and barbershops, automatically request Google reviews from their customers after a job is completed.
+
+## What CrewSignal does
+After a business marks a job complete in their existing CRM or booking software (currently Jobber or Square Appointments), CrewSignal automatically sends one text message to that customer with a thank-you and a link to leave a Google review. Businesses do not need to remember to ask, and customers are not contacted more than once per completed job.
+
+## Who it's for
+Field service contractors (roofing, HVAC, plumbing, fencing, decks) and appointment-based service businesses (salons, barbershops, studios) who want more Google reviews without manually following up with every customer.
+
+## Key facts
+- Works with: Jobber, Square Appointments
+- One message sent per completed job, never repeated for the same job
+- Every message includes a STOP opt-out instruction, honored permanently
+- Pricing is tailored to business size and job volume; available on request via a demo
+- Operated by Brandon Myles, Middle Tennessee, USA
+
+## Pages
+- Homepage and pricing: https://getcrewsignal.com/index.html
+- Privacy Policy: https://getcrewsignal.com/privacy.html
+- Terms & Conditions: https://getcrewsignal.com/terms.html
+- SMS Terms (consent and messaging details): https://getcrewsignal.com/sms-terms.html
+- Free Google Business Profile setup guide: https://getcrewsignal.com/google-setup-guide.html
+
+## Contact
+hello@getcrewsignal.com

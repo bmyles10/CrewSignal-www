@@ -1,0 +1,6 @@
+User-agent: *
+Allow: /
+
+Disallow: /onboarding-agreement.html
+
+Sitemap: https://getcrewsignal.com/sitemap.xml
