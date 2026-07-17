@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>CrewSignal | More Google Reviews. Zero Follow-Up.</title>
 <link rel="canonical" href="https://getcrewsignal.com/index.html">
-<meta name="description" content="CrewSignal automatically sends a Google review request by text after every completed job. Built for contractors and service businesses. Works with Square today — Jobber support coming soon.">
+<meta name="description" content="CrewSignal automatically sends a Google review request by text after every completed job. Built for contractors and service businesses. Works with Square and QuickBooks Online today, with new integrations built around what our clients actually use.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;600;700;800;900&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
@@ -71,11 +71,13 @@
 
   /* ---- hero ---- */
   .hero { padding: 76px 0 36px; }
+  .eyebrow-row { display:flex; flex-wrap:wrap; gap:10px; margin-bottom: 22px; }
   .eyebrow {
     display:inline-flex; align-items:center; gap:8px; font-family:'Archivo'; font-weight:700;
     font-size:.74rem; letter-spacing:.14em; text-transform:uppercase; color: var(--signal-dark);
-    background: #fde7dc; border:1px solid #f6c9b3; padding:5px 11px; border-radius: 100px; margin-bottom: 22px;
+    background: #fde7dc; border:1px solid #f6c9b3; padding:5px 11px; border-radius: 100px;
   }
+  .eyebrow.blue { color: var(--steel); background: #e8f1ff; border-color: #bcdcff; }
   .hero h1 { font-size: clamp(2.6rem, 6vw, 4.4rem); font-weight: 900; max-width: 14ch; }
   .hero h1 em { font-style: normal; color: var(--signal); }
   .hero .sub { font-size: clamp(1.05rem, 2vw, 1.28rem); color: var(--ink-soft); max-width: 52ch; margin-top: 22px; }
@@ -133,6 +135,20 @@
   .g-box { border:1px solid #3a4048; border-radius:10px; padding:16px; color:#c2c8d0; font-size:.9rem; line-height:1.5; margin:0 2px 18px; min-height:64px; }
   .g-photos { display:inline-flex; align-items:center; gap:8px; color:#8fbfff; background:#1c2733; border-radius:100px; padding:11px 18px; font-size:.88rem; font-weight:600; margin:0 2px 26px; }
   .g-post { text-align:center; color:#5b6169; font-size:.94rem; font-weight:600; padding:12px; border-radius:100px; background:#22272c; margin: 0 2px; }
+
+  /* ---- integrations band ---- */
+  .integrations-band { background: var(--ink); padding: 48px 0; }
+  .integrations-band .kicker { color: #8a929c; }
+  .integrations-band h2 { color: #fff; font-size: clamp(1.5rem, 3vw, 2rem); font-weight: 800; margin-top: 8px; }
+  .integrations-band p { color: #c2c8d0; margin-top: 10px; max-width: 60ch; }
+  .integration-pills { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 26px; }
+  .integration-pill {
+    display: inline-flex; align-items: center; gap: 9px; background: #22272c; border: 1px solid #363c44;
+    color: #fff; font-family: 'Archivo'; font-weight: 700; font-size: .95rem; padding: 12px 20px; border-radius: 10px;
+  }
+  .integration-pill .dot { width: 8px; height: 8px; border-radius: 50%; background: var(--good); flex: none; }
+  .integration-pill.soon .dot { background: #c79100; }
+  .integration-pill.open { background: transparent; border: 1.5px dashed #4a515a; color: #c2c8d0; font-weight: 600; }
 
   /* ---- who it's for ---- */
   .who { display:grid; grid-template-columns: 1fr 1fr; gap: 20px; }
@@ -219,7 +235,10 @@
 <!-- HERO -->
 <section class="hero">
   <div class="wrap">
-    <span class="eyebrow">★ Automated reputation for the trades</span>
+    <div class="eyebrow-row">
+      <span class="eyebrow">★ Automated reputation for the trades</span>
+      <span class="eyebrow blue">🔌 Works with what you already use</span>
+    </div>
     <div class="flow">
       <div>
         <h1>More Google reviews. <em>Zero follow-up.</em></h1>
@@ -228,7 +247,7 @@
           <a href="#contact" class="btn">Request Demo &amp; Pricing</a>
           <a href="#how" class="btn ghost">See how it works</a>
         </div>
-        <p class="hero-note">Built for contractors &amp; service businesses · Works with Square today, Jobber coming soon · TCPA-compliant messaging</p>
+        <p class="hero-note">Built for contractors &amp; service businesses · Works with Square &amp; QuickBooks Online today · New integrations built around what you use · TCPA-compliant messaging</p>
       </div>
 
       <!-- signature element: the actual text a customer receives -->
@@ -247,14 +266,17 @@
   </div>
 </section>
 
-<!-- BETA CALLOUT -->
-<section id="beta" style="padding: 40px 0;">
+<!-- INTEGRATIONS -->
+<section class="integrations-band">
   <div class="wrap">
-    <div class="who-card" style="max-width: 720px; margin: 0 auto; text-align: center; border-color: var(--signal);">
-      <span class="tag">Free beta program</span>
-      <h3 style="margin-top: 8px;">Looking for 1-2 more free beta testers</h3>
-      <p style="color: var(--ink-soft); margin-top: 12px; font-size: .98rem;">CrewSignal is brand new and we're looking for a couple more service business owners willing to try it for free, no cost, no obligation. Just honest feedback from real use. If you run a lawn care, cleaning, HVAC, plumbing, salon, or similar business, we'd love to talk.</p>
-      <div style="margin-top: 20px;"><a href="#contact" class="btn">Apply for a free beta spot</a></div>
+    <div class="kicker">Integrations</div>
+    <h2>Works with what you already run.</h2>
+    <p>No new software to learn, no data entry, no switching how you take payments or track jobs. CrewSignal plugs into the tools you're already using.</p>
+    <div class="integration-pills">
+      <span class="integration-pill"><span class="dot"></span>Square</span>
+      <span class="integration-pill"><span class="dot"></span>QuickBooks Online</span>
+      <span class="integration-pill soon"><span class="dot"></span>Jobber (coming soon)</span>
+      <span class="integration-pill open">+ whatever you use, tell us and we'll build it</span>
     </div>
   </div>
 </section>
@@ -352,7 +374,7 @@
         <ul>
           <li>You already text customers for on-my-way alerts, scheduling, gate codes</li>
           <li>Your crew is supposed to ask for a review before they leave. They don't.</li>
-          <li>Jobber integration is in active development, reach out to be an early beta tester</li>
+          <li>Works with QuickBooks Online today — Jobber support is in active development</li>
           <li>You decide when a job is marked complete, so you stay in control of the moment</li>
         </ul>
       </div>
@@ -376,6 +398,7 @@
     <span class="chip"><span class="dot"></span>TCPA-compliant messaging</span>
     <span class="chip"><span class="dot"></span>Every text includes STOP opt-out</span>
     <span class="chip"><span class="dot"></span>Works with Square</span>
+    <span class="chip"><span class="dot"></span>Works with QuickBooks Online</span>
     <span class="chip soon"><span class="dot"></span>Jobber support coming soon</span>
     <span class="chip"><span class="dot"></span>Carrier-registered sending number</span>
   </div>
@@ -473,7 +496,7 @@
     </div>
     <div class="faq">
       <details open><summary>Do I have to change how I work?</summary><p>No. You keep using the same software to run and close jobs. CrewSignal listens for the "job complete" signal from your CRM and handles the review request automatically. The only step you do is the one you already do.</p></details>
-      <details><summary>Which software do you work with?</summary><p>CrewSignal works with Square today. Jobber support is in active development, if you use Jobber and want to be an early beta tester, get in touch and we'll prioritize your integration. If you use something else like Housecall Pro, JobNimbus, Spectora, HoneyBook, or anything else, let us know too. We add integrations based on what real customers actually use.</p></details>
+      <details><summary>Which software do you work with?</summary><p>CrewSignal works with Square and QuickBooks Online today. Jobber support is in active development, if you use Jobber, get in touch and we'll prioritize your integration. Don't see your software listed? Tell us what you use, Housecall Pro, JobNimbus, Spectora, HoneyBook, or anything else, and we'll build it. CrewSignal was built to plug into whatever you're already running, not the other way around.</p></details>
       <details><summary>Is text-message review collection allowed?</summary><p>Yes, when done correctly. CrewSignal uses a carrier-registered sending number, includes a clear opt-out ("Reply STOP") in every message, and honors every opt-out permanently. You're responsible for letting your customers know at the time you collect their number that they'll get a review request text, which we cover in our <a href="/terms.html" style="color:var(--signal-dark);">Terms</a> and <a href="/sms-terms.html" style="color:var(--signal-dark);">SMS Terms</a>.</p></details>
       <details><summary>What does the text actually say?</summary><p>A short, friendly message with the customer's name, your business name, your Google review link, and an opt-out line. You can customize the wording so it sounds like you, not a corporate notification.</p></details>
       <details><summary>Will my repeat customers get spammed every visit?</summary><p>No. If someone comes in every week for a fade or a lineup, they won't get hit with a review request every single time. That's exactly the kind of thing that makes a business look spammy, and we hear that concern a lot. CrewSignal sends one review request per completed job, and duplicate signals are automatically detected and ignored.</p></details>
