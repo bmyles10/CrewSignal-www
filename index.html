@@ -69,6 +69,8 @@
   .btn.ghost { background: transparent; color: var(--ink); box-shadow: inset 0 0 0 1.5px var(--ink); }
   .btn.ghost:hover { background: var(--ink); color: var(--paper); }
   @media (max-width: 720px){ nav.links a:not(.btn){ display:none; } }
+  .btn-short { display:none; }
+  @media (max-width: 400px){ .btn-full { display:none; } .btn-short { display:inline; } }
 
   /* ---- hero ---- */
   .hero { padding: 76px 0 36px; }
@@ -230,7 +232,7 @@
       <a href="#who">Who it's for</a>
       <a href="#pricing">Pricing</a>
       <a href="#faq">FAQ</a>
-      <a href="#contact" class="btn">Request Demo &amp; Pricing</a>
+      <a href="#contact" class="btn"><span class="btn-full">Request Demo &amp; Pricing</span><span class="btn-short">Get a Demo</span></a>
     </nav>
   </div>
 </header>
