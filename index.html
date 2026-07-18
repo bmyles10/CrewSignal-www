@@ -16,9 +16,9 @@
     --paper: #f4f1ea;
     --paper-card: #fbfaf6;
     --line: #d9d3c6;
-    --signal: #ff5a1f;       /* safety-orange, the field accent */
-    --signal-dark: #e0440c;
-    --steel: #1f6feb;        /* trust blue, used sparingly */
+    --signal: #17827c;       /* CrewSignal teal, primary accent */
+    --signal-dark: #106560;
+    --steel: #174e8e;        /* CrewSignal navy, secondary accent */
     --good: #1f7a44;
     --shadow: 0 1px 0 rgba(0,0,0,.04), 0 8px 28px -18px rgba(0,0,0,.35);
   }
@@ -55,6 +55,7 @@
   }
   .logo .mark::before { width: 7px; height: 7px; }
   .logo .mark::after { width: 15px; height: 15px; opacity:.55; }
+  .logo img { height: 34px; width: auto; display: block; }
   nav.links { display: flex; gap: 28px; align-items: center; font-size: .94rem; font-weight: 500; }
   nav.links a { text-decoration: none; color: var(--ink-soft); }
   nav.links a:hover { color: var(--ink); }
@@ -75,7 +76,7 @@
   .eyebrow {
     display:inline-flex; align-items:center; gap:8px; font-family:'Archivo'; font-weight:700;
     font-size:.74rem; letter-spacing:.14em; text-transform:uppercase; color: var(--signal-dark);
-    background: #fde7dc; border:1px solid #f6c9b3; padding:5px 11px; border-radius: 100px;
+    background: #e3f5f3; border:1px solid #bfe4e0; padding:5px 11px; border-radius: 100px;
   }
   .eyebrow.blue { color: var(--steel); background: #e8f1ff; border-color: #bcdcff; }
   .hero h1 { font-size: clamp(2.6rem, 6vw, 4.4rem); font-weight: 900; max-width: 14ch; }
@@ -210,6 +211,8 @@
   footer.site { background: var(--ink); color: #c2c8d0; padding: 48px 0 36px; }
   footer.site .cols { display:flex; justify-content:space-between; flex-wrap:wrap; gap:28px; }
   footer.site .logo { color:#fff; }
+  footer.site .logo .crew { color:#6fa3d8; }
+  footer.site .logo .signal { color:#5fc4bd; }
   footer.site a { color:#c2c8d0; text-decoration:none; }
   footer.site a:hover { color:#fff; }
   footer.site nav { display:flex; gap:22px; flex-wrap:wrap; font-size:.92rem; }
@@ -221,7 +224,7 @@
 
 <header class="bar">
   <div class="wrap bar-inner">
-    <div class="logo"><span class="mark"></span>CrewSignal</div>
+    <div class="logo"><img src="/assets/CombinedLogo-transparent.png" alt="CrewSignal"></div>
     <nav class="links">
       <a href="#how">How it works</a>
       <a href="#who">Who it's for</a>
@@ -550,7 +553,7 @@
 <footer class="site">
   <div class="wrap">
     <div class="cols">
-      <div class="logo"><span class="mark"></span>CrewSignal</div>
+      <div class="logo"><img src="/assets/CrewSignal-Icon-transparent.png" alt="CrewSignal"><span><span class="crew">Crew</span><span class="signal">Signal</span></span></div>
       <nav>
         <a href="#how">How it works</a>
         <a href="#pricing">Pricing</a>
