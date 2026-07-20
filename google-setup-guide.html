@@ -11,7 +11,7 @@
 <style>
   :root {
     --ink: #16191d; --ink-soft: #3d444d; --paper: #f4f1ea; --paper-card: #fbfaf6;
-    --line: #d9d3c6; --signal: #ff5a1f; --signal-dark: #e0440c; --steel: #1f6feb; --good: #1f7a44;
+    --line: #d9d3c6; --signal: #17827c; --signal-dark: #106560; --steel: #174e8e; --good: #1f7a44;
   }
   * { box-sizing: border-box; margin: 0; padding: 0; }
   html { scroll-behavior: smooth; }
@@ -27,6 +27,7 @@
   .logo .mark::before, .logo .mark::after { content:''; position:absolute; border: 2.5px solid #fff; border-radius: 50%; top:50%; left:50%; transform: translate(-50%,-50%); }
   .logo .mark::before { width: 7px; height: 7px; }
   .logo .mark::after { width: 15px; height: 15px; opacity:.55; }
+  .logo img { height: 34px; width: auto; display: block; }
   .back { font-family:'Archivo'; font-weight:700; font-size:.85rem; text-decoration:none; color: var(--signal-dark); }
   .back:hover { color: var(--ink); }
 
@@ -63,7 +64,7 @@
 
 <header class="bar">
   <div class="bar-inner">
-    <a class="logo" href="/index.html"><span class="mark"></span>CrewSignal</a>
+    <a class="logo" href="/index.html"><img src="/assets/CombinedLogo-transparent.png" alt="CrewSignal"></a>
     <a class="back" href="/index.html">&larr; Back to CrewSignal</a>
   </div>
 </header>
