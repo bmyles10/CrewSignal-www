@@ -14,7 +14,7 @@
 <script>
 (function() {
   try {
-    var trackingBase = "https://licorice-elope-untainted.ngrok-free.dev";
+    var trackingBase = "https://api.getcrewsignal.com";
     var campaignId = new URLSearchParams(window.location.search).get('c');
     if (trackingBase && campaignId) {
       var trackingUrl = trackingBase + '/api/v1/track-click/' + encodeURIComponent(campaignId);
