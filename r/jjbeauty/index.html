@@ -11,7 +11,23 @@
   .box { text-align: center; padding: 32px; max-width: 420px; }
   a { color: #ff5a1f; font-weight: 700; }
 </style>
-<script>window.location.replace("https://search.google.com/local/writereview?placeid=ChIJ2fl-LhZ5ZIgRBkC_oxun6J0");</script>
+<script>
+(function() {
+  try {
+    var trackingBase = "https://api.getcrewsignal.com";
+    var campaignId = new URLSearchParams(window.location.search).get('c');
+    if (trackingBase && campaignId) {
+      var trackingUrl = trackingBase + '/api/v1/track-click/' + encodeURIComponent(campaignId);
+      if (navigator.sendBeacon) {
+        navigator.sendBeacon(trackingUrl);
+      } else {
+        fetch(trackingUrl, { method: 'POST', keepalive: true }).catch(function() {});
+      }
+    }
+  } catch (e) {}
+  window.location.replace("https://search.google.com/local/writereview?placeid=ChIJ2fl-LhZ5ZIgRBkC_oxun6J0");
+})();
+</script>
 </head>
 <body>
   <div class="box">
