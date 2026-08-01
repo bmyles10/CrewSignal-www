@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png">
+<link rel="icon" type="image/png" sizes="192x192" href="/favicon-192.png">
+<link rel="icon" type="image/png" sizes="512x512" href="/favicon-512.png">
+<link rel="apple-touch-icon" sizes="180x180" href="/favicon-180.png">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Client Login | CrewSignal</title>
+<link rel="canonical" href="https://getcrewsignal.com/login.html">
+<meta name="robots" content="noindex">
+<meta name="description" content="Log in to your CrewSignal client account.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;600;700;800;900&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --ink: #16191d; --ink-soft: #3d444d; --paper: #f4f1ea; --paper-card: #fbfaf6;
+    --line: #d9d3c6; --signal: #17827c; --signal-dark: #106560; --steel: #174e8e; --good: #1f7a44;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body { font-family: 'Inter', system-ui, sans-serif; color: var(--ink); background: var(--paper); line-height: 1.6; -webkit-font-smoothing: antialiased; min-height: 100vh; display: flex; flex-direction: column; }
+  h1,h2,h3,.logo { font-family: 'Archivo', system-ui, sans-serif; letter-spacing: -0.02em; }
+  .wrap { max-width: 1080px; margin: 0 auto; padding: 0 24px; }
+  a { color: inherit; }
+
+  header.bar { position: sticky; top: 0; z-index: 50; background: rgba(244,241,234,.88); backdrop-filter: blur(8px); border-bottom: 1px solid var(--line); }
+  .bar-inner { max-width: 1080px; margin: 0 auto; padding: 0 24px; display: flex; align-items: center; justify-content: space-between; height: 64px; }
+  .logo { font-weight: 900; font-size: 1.35rem; letter-spacing: -0.04em; display:flex; align-items:center; gap:9px; text-decoration: none; color: var(--ink); }
+  .logo img { height: 34px; width: auto; display: block; }
+  .back { font-family:'Archivo'; font-weight:700; font-size:.85rem; text-decoration:none; color: var(--signal-dark); }
+  .back:hover { color: var(--ink); }
+
+  main.login-main { flex: 1; display: flex; align-items: center; justify-content: center; padding: 56px 24px; }
+  .login-card {
+    width: 100%; max-width: 420px; background: var(--paper-card); border: 1px solid var(--line);
+    border-radius: 16px; padding: 36px 32px; box-shadow: 0 1px 0 rgba(0,0,0,.04), 0 8px 28px -18px rgba(0,0,0,.35);
+  }
+  .login-card .kicker { font-family:'Archivo'; font-weight:700; font-size:.72rem; letter-spacing:.14em; text-transform:uppercase; color: var(--ink-soft); }
+  .login-card h1 { font-size: 1.6rem; font-weight: 800; margin-top: 8px; }
+  .login-card .sub { color: var(--ink-soft); font-size: .92rem; margin-top: 8px; margin-bottom: 28px; }
+  .row { margin-bottom: 18px; }
+  label { display:block; font-family:'Archivo'; font-weight:600; font-size:.85rem; margin-bottom:6px; }
+  input {
+    width:100%; padding:12px 14px; border:1px solid var(--line); border-radius:9px; background:#fff;
+    font-family:'Inter'; font-size:1rem; color:var(--ink);
+  }
+  input:focus { outline:2px solid var(--signal); border-color:transparent; }
+  .forgot { display: block; text-align: right; font-size: .85rem; color: var(--signal-dark); text-decoration: none; margin: -8px 0 22px; }
+  .forgot:hover { color: var(--ink); text-decoration: underline; }
+  .actions { display: flex; gap: 12px; }
+  .btn {
+    display: inline-block; text-decoration: none; text-align: center;
+    font-weight: 700; font-family:'Archivo'; padding: 12px 20px; border-radius: 8px;
+    border: none; cursor: pointer; font-size: .95rem; transition: transform .08s ease, background .15s ease;
+  }
+  .btn.primary { background: var(--signal); color: #fff; flex: 1; box-shadow: 0 1px 0 rgba(0,0,0,.12); }
+  .btn.primary:hover { background: var(--signal-dark); transform: translateY(-1px); }
+  .btn.cancel { background: transparent; color: var(--ink-soft); box-shadow: inset 0 0 0 1.5px var(--line); flex: none; }
+  .btn.cancel:hover { background: #fff; color: var(--ink); }
+  .notice {
+    display: none; margin-top: 20px; padding: 14px 16px; border-radius: 9px;
+    background: #e3f5f3; border: 1px solid #bfe4e0; color: var(--signal-dark); font-size: .88rem; line-height: 1.5;
+  }
+  .notice.show { display: block; }
+
+  footer.site { background: var(--ink); color: #c2c8d0; padding: 40px 0; margin-top: auto; }
+  footer.site .wrap { max-width: 1080px; }
+  footer.site a { color:#c2c8d0; text-decoration:none; margin-right: 18px; font-size:.9rem; }
+  footer.site a:hover { color:#fff; }
+  footer.site .legal { margin-top: 18px; padding-top: 18px; border-top: 1px solid #2a2f36; font-size: .8rem; color:#8a929c; max-width: 75ch; }
+</style>
+</head>
+<body>
+
+<header class="bar">
+  <div class="bar-inner">
+    <a class="logo" href="/index.html"><img src="/assets/CombinedLogo-transparent.png" alt="CrewSignal"></a>
+    <a class="back" href="/index.html">&larr; Back to CrewSignal</a>
+  </div>
+</header>
+
+<main class="login-main">
+  <div class="login-card">
+    <div class="kicker">Client Login</div>
+    <h1>Log in to your account</h1>
+    <p class="sub">Enter your username and password to see your review activity.</p>
+
+    <form id="login-form">
+      <div class="row">
+        <label for="username">Username</label>
+        <input type="text" id="username" name="username" autocomplete="username" placeholder="you@yourbusiness.com">
+      </div>
+      <div class="row">
+        <label for="password">Password</label>
+        <input type="password" id="password" name="password" autocomplete="current-password" placeholder="Enter your password">
+      </div>
+      <a href="#" class="forgot" id="forgot-link">Forgot password?</a>
+      <div class="actions">
+        <button type="submit" class="btn primary">Login</button>
+        <a href="/index.html" class="btn cancel">Cancel</a>
+      </div>
+      <p class="notice" id="login-notice">Client accounts aren't live yet. CrewSignal's client dashboard is on the way. In the meantime, reach us at <a href="mailto:hello@getcrewsignal.com" style="color:var(--signal-dark); font-weight:600;">hello@getcrewsignal.com</a>.</p>
+    </form>
+  </div>
+</main>
+
+<footer class="site">
+  <div class="wrap">
+    <nav>
+      <a href="/index.html">Home</a>
+      <a href="/privacy.html">Privacy Policy</a>
+      <a href="/terms.html">Terms &amp; Conditions</a>
+      <a href="/sms-terms.html">SMS Terms</a>
+    </nav>
+    <p class="legal">&copy; 2026 CrewSignal, a service of MylesHouse Technologies LLC, Tennessee, USA. Contact: hello@getcrewsignal.com</p>
+  </div>
+</footer>
+
+<script>
+  // No backend exists for client accounts yet (added 2026-07-31, scaffolding
+  // only, per Brandon: "we don't have anything to log into yet, but this is
+  // the scaffolding for our Client Dashboard login"). The form intentionally
+  // never submits anywhere and never reads back what was typed anywhere else
+  // on the page - it just shows an honest "not live yet" message instead of
+  // pretending a login attempt succeeded or silently doing nothing.
+  document.getElementById('login-form').addEventListener('submit', function (e) {
+    e.preventDefault();
+    document.getElementById('login-notice').classList.add('show');
+  });
+  document.getElementById('forgot-link').addEventListener('click', function (e) {
+    e.preventDefault();
+    document.getElementById('login-notice').classList.add('show');
+  });
+</script>
+
+</body>
+</html>
