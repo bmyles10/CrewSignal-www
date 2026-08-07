@@ -178,19 +178,32 @@
   .trust .chip.soon .dot { background:#c79100; }
 
   /* ---- pricing ---- */
-  .tiers { display:grid; grid-template-columns: repeat(3,1fr); gap: 20px; }
-  @media (max-width: 860px){ .tiers { grid-template-columns: 1fr; max-width:420px; margin:0 auto; } }
+  .tiers { display:grid; grid-template-columns: repeat(2,1fr); gap: 24px; max-width: 760px; margin: 0 auto; }
+  @media (max-width: 760px){ .tiers { grid-template-columns: 1fr; max-width:420px; margin:0 auto; } }
   .tier { border:1px solid var(--line); border-radius:16px; padding:28px; background: var(--paper-card); display:flex; flex-direction:column; }
   .tier.feature { border:2px solid var(--signal); box-shadow: var(--shadow); position:relative; }
   .tier.feature .ribbon { position:absolute; top:-12px; left:28px; background:var(--signal); color:#fff; font-family:'Archivo'; font-weight:700; font-size:.72rem; letter-spacing:.08em; text-transform:uppercase; padding:4px 12px; border-radius:100px; }
   .tier .name { font-family:'Archivo'; font-weight:800; font-size:1.15rem; }
-  .tier .price { font-family:'Archivo'; font-weight:900; font-size:2.4rem; margin: 14px 0 2px; }
-  .tier .price span { font-size:1rem; font-weight:600; color: var(--ink-soft); }
-  .tier .setup { font-size:.9rem; color: var(--ink-soft); }
+  .tier .size-note { font-size:.85rem; color: var(--ink-soft); margin-top:2px; }
+  /* Two price options per card (added 2026-08-07) — Founding Member rate
+     alongside the standard rate, since both size tiers now offer both
+     membership levels, rather than Founding Member being its own separate
+     card. Founding shown first/emphasized since that's the one with real
+     scarcity (9 of 10 company spots left) driving urgency. */
+  .price-pair { display:flex; gap:18px; margin: 16px 0 2px; flex-wrap:wrap; }
+  .price-option { flex:1; min-width:120px; }
+  .price-option .price-label { display:block; font-family:'Archivo'; font-weight:700; font-size:.72rem; letter-spacing:.06em; text-transform:uppercase; color: var(--ink-soft); }
+  .price-option.founding .price-label { color: var(--signal-dark); }
+  .price-option .price-value { font-family:'Archivo'; font-weight:900; font-size:1.9rem; display:block; }
+  .price-option .price-value small { font-size:.85rem; font-weight:600; color: var(--ink-soft); }
+  .tier .setup { font-size:.9rem; color: var(--ink-soft); margin-top:10px; }
   .tier ul { list-style:none; margin:18px 0 24px; flex:1; }
   .tier li { padding:7px 0 7px 24px; position:relative; font-size:.94rem; color: var(--ink-soft); }
   .tier li::before { content:'✓'; position:absolute; left:0; color: var(--good); font-weight:800; }
   .tier .btn { text-align:center; }
+  .tiers-footnote { text-align:center; margin-top:22px; font-size:.92rem; color: var(--ink-soft); }
+  .tiers-footnote a { color: var(--signal-dark); font-weight:600; text-decoration:none; }
+  .tiers-footnote a:hover { text-decoration:underline; }
 
   /* ---- FAQ ---- */
   .faq details { border-bottom:1px solid var(--line); padding: 18px 0; }
@@ -484,49 +497,56 @@
     </div>
     <div class="tiers">
       <div class="tier feature">
-        <span class="ribbon">Limited (6 spots remaining)</span>
-        <div class="name">Founding Member</div>
-        <div class="price">$49<span>/month</span></div>
-        <div class="setup">$300 one-time setup. Rate locked for life once you join.</div>
+        <span class="ribbon">Founding spots: 9 left</span>
+        <div class="name">Solo</div>
+        <div class="size-note">For 1-2 people using CrewSignal</div>
+        <div class="price-pair">
+          <div class="price-option founding">
+            <span class="price-label">Founding Member</span>
+            <span class="price-value">$49<small>/mo</small></span>
+          </div>
+          <div class="price-option">
+            <span class="price-label">Standard</span>
+            <span class="price-value">$79<small>/mo</small></span>
+          </div>
+        </div>
+        <div class="setup">$300 one-time setup. Founding Member rate locked for life once you join.</div>
         <ul>
-          <li>Rate locked for life as a founding client</li>
           <li>One CRM connection</li>
           <li>Automatic review texts</li>
           <li>Branded message &amp; review link</li>
           <li>Opt-out handling included</li>
-          <li>Direct founder support</li>
+          <li>Send activity &amp; click reporting</li>
         </ul>
         <a href="#contact" class="btn">Claim a founding spot</a>
       </div>
-      <div class="tier">
-        <div class="name">Professional</div>
-        <div class="price">$79<span>/month</span></div>
-        <div class="setup">$300 one-time setup</div>
+      <div class="tier feature">
+        <span class="ribbon">Founding spots: 9 left</span>
+        <div class="name">Team</div>
+        <div class="size-note">For 3-7 people billing under one location</div>
+        <div class="price-pair">
+          <div class="price-option founding">
+            <span class="price-label">Founding Member</span>
+            <span class="price-value">$149<small>/mo</small></span>
+          </div>
+          <div class="price-option">
+            <span class="price-label">Standard</span>
+            <span class="price-value">$249<small>/mo</small></span>
+          </div>
+        </div>
+        <div class="setup">$300 one-time setup. One flat monthly bill, however many people are on your team right now.</div>
         <ul>
-          <li>One CRM connection</li>
-          <li>Automatic review texts</li>
-          <li>Branded message &amp; review link</li>
-          <li>Opt-out handling included</li>
-          <li>Priority support</li>
-          <li>Send activity &amp; click reporting</li>
-        </ul>
-        <a href="#contact" class="btn ghost">Request Demo &amp; Pricing</a>
-      </div>
-      <div class="tier">
-        <div class="name">Team (Multi-Operator)</div>
-        <div class="price">$49<span>/operator, per month</span></div>
-        <div class="setup">$300 one-time setup per operator. One combined bill for your whole team.</div>
-        <ul>
-          <li>Everything in Professional</li>
+          <li>Everything in Solo</li>
           <li>Built for shops where each professional bills separately (salons, barbershops, and similar)</li>
-          <li>Every operator gets their own CRM connection and review tracking</li>
-          <li>One combined invoice for the whole location</li>
-          <li>White-glove onboarding for every operator you add</li>
+          <li>Every team member gets their own CRM connection and review tracking</li>
+          <li>One combined invoice for the whole location, flat rate for 3-7 people</li>
+          <li>No need to report who joined or left. The rate only changes if your team grows past 7 or drops to 2 or fewer</li>
           <li>Dedicated support contact</li>
         </ul>
-        <a href="#contact" class="btn ghost">Request Demo &amp; Pricing</a>
+        <a href="#contact" class="btn">Claim a founding spot</a>
       </div>
     </div>
+    <p class="tiers-footnote">More than 7 people on one team? <a href="#contact">Contact us</a> and we'll work out a custom rate.</p>
   </div>
 </section>
 
@@ -544,7 +564,7 @@
       <details><summary>What does the text actually say?</summary><p>A short, friendly message with the customer's name, your business name, your Google review link, and an opt-out line. You can customize the wording so it sounds like you, not a corporate notification.</p></details>
       <details><summary>Can I control when the request sends?</summary><p>Yes. CrewSignal can hold a completed job for a set delay before the request goes out, so it doesn't feel instant or robotic. We help you configure that timing around your normal customer experience.</p></details>
       <details><summary>Will my repeat customers get spammed every visit?</summary><p>No. CrewSignal remembers when each customer was last contacted and applies a cooldown period before they're eligible for another request, so someone who comes in every week won't get hit every single time. Duplicate completion events are also automatically detected and ignored.</p></details>
-      <details><summary>What does it cost to get started?</summary><p>A one-time $300 setup fee covers connecting your software, configuring your review link, and getting your message dialed in. Monthly plans start at $79. We're currently accepting a limited number of Founding Member spots at $49/month, locked in for life once you join. If you run a shop where each professional bills separately, like a salon or barbershop, our Team plan bills $49/operator/month under one combined invoice. Request a demo below and we'll confirm what fits your setup.</p></details>
+      <details><summary>What does it cost to get started?</summary><p>A one-time $300 setup fee covers connecting your software, configuring your review link, and getting your message dialed in. Pricing is based on how many people are using CrewSignal. Solo plans (1-2 people) are $79/month standard. Team plans (3-7 people billing under one location, like a salon or barbershop) are one flat $249/month, no matter how many people are on the team that month. We're currently accepting a limited number of Founding Member spots (9 remaining, counted per business, not per person): $49/month for Solo, $149/month for Team, locked in for life once you join. More than 7 people on one team? Request a demo below and we'll work out a custom rate.</p></details>
       <details><summary>How fast can I be up and running?</summary><p>Most setups take a few days: connecting your CRM, confirming your Google review link, and getting your message wording dialed in. Once that's done, reviews start flowing after your very next completed job.</p></details>
       <details><summary>What if I don't have a Google Business Profile yet?</summary><p>No problem, a lot of contractors don't. We'll walk you through setting one up in about 5 minutes as part of onboarding. <a href="/google-setup-guide.html" style="color:var(--signal-dark);">See the setup guide here</a>.</p></details>
       <details><summary>Can I cancel?</summary><p>Yes. Plans are month-to-month with no long-term contract. Cancel anytime; details are in our Terms.</p></details>
