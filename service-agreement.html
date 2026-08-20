@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png">
+<link rel="icon" type="image/png" sizes="192x192" href="/favicon-192.png">
+<link rel="icon" type="image/png" sizes="512x512" href="/favicon-512.png">
+<link rel="apple-touch-icon" sizes="180x180" href="/favicon-180.png">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Service Agreement | CrewSignal</title>
+<meta name="robots" content="noindex">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;600;700;800;900&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --ink: #16191d;
+    --ink-soft: #3d444d;
+    --paper: #f4f1ea;
+    --paper-card: #fbfaf6;
+    --line: #d9d3c6;
+    --signal: #17827c;
+    --signal-dark: #106560;
+    --steel: #174e8e;
+    --good: #1f7a44;
+    --shadow: 0 1px 0 rgba(0,0,0,.04), 0 8px 28px -18px rgba(0,0,0,.35);
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: 'Inter', system-ui, sans-serif;
+    color: var(--ink);
+    background: var(--paper);
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+  }
+  h1,h2,h3 { font-family: 'Archivo', system-ui, sans-serif; letter-spacing: -0.02em; line-height: 1.05; }
+  a { color: var(--signal-dark); text-decoration: none; }
+  a:hover { text-decoration: underline; }
+  .wrap { max-width: 680px; margin: 0 auto; padding: 0 24px; }
+
+  header.bar { border-bottom: 1px solid var(--line); padding: 22px 0; }
+  .logo { font-family: 'Archivo'; font-weight: 900; font-size: 1.3rem; letter-spacing: -0.04em; display:flex; align-items:center; gap:9px; }
+  .logo img { height: 30px; width: auto; display: block; }
+
+  main { padding: 48px 0 80px; }
+  .kicker { font-family:'Archivo'; font-weight:700; font-size:.78rem; letter-spacing:.14em; text-transform:uppercase; color: var(--ink-soft); }
+  h1 { font-size: clamp(1.9rem, 4vw, 2.5rem); font-weight: 800; margin-top: 10px; }
+  .intro { color: var(--ink-soft); margin-top: 16px; font-size: 1.02rem; }
+
+  .draft-notice {
+    background: #fdf3dc; border: 1px solid #e8cf8f; border-radius: 10px;
+    padding: 16px 18px; margin-top: 28px; font-size: .88rem; color: var(--ink);
+  }
+
+  .card {
+    background: var(--paper-card); border: 1px solid var(--line); border-radius: 14px;
+    padding: 30px; margin-top: 24px; box-shadow: var(--shadow);
+  }
+  .card h2 { font-size: 1.15rem; font-weight: 800; margin-bottom: 14px; }
+  .card p, .card li { font-size: .96rem; color: var(--ink-soft); }
+  .card ul { margin: 12px 0 0 0; padding-left: 20px; }
+  .card li { margin-bottom: 8px; }
+  .card + .card { margin-top: 20px; }
+
+  form { margin-top: 36px; }
+  .field { margin-bottom: 16px; }
+  .field label { display:block; font-family:'Archivo'; font-weight:600; font-size:.85rem; margin-bottom:6px; }
+  .field input, .field select {
+    width: 100%; padding: 11px 14px; border: 1.5px solid var(--line); border-radius: 8px;
+    font-size: .96rem; font-family: inherit; background: #fff;
+  }
+  .field input:focus, .field select:focus { outline: none; border-color: var(--signal); }
+  .field-row { display:flex; gap:14px; }
+  .field-row .field { flex:1; }
+
+  .check-row {
+    display: flex; align-items: flex-start; gap: 12px;
+    background: var(--paper-card); border: 1px solid var(--line); border-radius: 12px;
+    padding: 20px; margin-bottom: 16px;
+  }
+  .check-row input[type="checkbox"] { width: 20px; height: 20px; margin-top: 2px; flex: none; accent-color: var(--signal); }
+  .check-row label { font-size: .95rem; color: var(--ink); }
+
+  .btn {
+    display: inline-block; background: var(--signal); color: #fff; text-decoration: none;
+    font-weight: 700; font-family:'Archivo'; padding: 14px 22px; border-radius: 8px;
+    border: none; cursor: pointer; font-size: 1rem; width: 100%;
+  }
+  .btn:hover { background: var(--signal-dark); }
+
+  .fineprint { font-size: .8rem; color: var(--ink-soft); margin-top: 14px; line-height: 1.55; }
+
+  footer.site { padding: 30px 0; border-top: 1px solid var(--line); margin-top: 40px; }
+  footer.site p { font-size: .82rem; color: var(--ink-soft); }
+
+  @media print {
+    header.bar, form, footer.site { display: none; }
+    .draft-notice { display: none; }
+    body { background: #fff; }
+    .card { box-shadow: none; border: 1px solid #ccc; }
+  }
+</style>
+</head>
+<body>
+
+<header class="bar">
+  <div class="wrap">
+    <div class="logo"><img src="/assets/CombinedLogo-transparent.png" alt="CrewSignal"></div>
+  </div>
+</header>
+
+<main>
+  <div class="wrap">
+    <div class="kicker">Before your first billing cycle</div>
+    <h1>Service agreement</h1>
+    <p class="intro">This confirms the actual terms of your paid CrewSignal plan: what you're paying, how billing works, and how to cancel if you ever need to. It works alongside our existing <a href="/terms.html">Terms &amp; Conditions</a>, <a href="/privacy.html">Privacy Policy</a>, and <a href="/sms-terms.html">SMS Terms</a>, which already cover consent responsibilities and don't need repeating here.</p>
+
+    <div class="draft-notice">
+      <strong>Internal note, not shown to the client:</strong> this has not been reviewed by an attorney yet (tracked separately, task 4.13a). Fine as a real, honest agreement to use starting now, but flag it for a real legal review once there's bandwidth, especially the liability and cancellation sections.
+    </div>
+
+    <div class="card">
+      <h2>1. The parties</h2>
+      <p>This agreement is between <strong>MylesHouse Technologies LLC</strong>, doing business as CrewSignal, a Tennessee limited liability company ("CrewSignal"), and the business named below ("Client").</p>
+    </div>
+
+    <div class="card">
+      <h2>2. Plan &amp; pricing</h2>
+      <p>Client is enrolling in the plan and rate indicated below. If Client is joining as a Founding Member, that rate is locked for the life of the account and will never increase, even as CrewSignal's standard pricing changes, as long as the account stays active and within its plan's size band.</p>
+      <p style="margin-top:10px;">A one-time setup fee applies unless waived below. Pricing is billed monthly in advance unless otherwise noted.</p>
+    </div>
+
+    <div class="card">
+      <h2>3. Term &amp; billing</h2>
+      <ul>
+        <li>This is a month-to-month agreement. No long-term contract, no early-termination penalty.</li>
+        <li>Billing begins on the start date indicated below and recurs monthly on that same date.</li>
+        <li>If Client's team size grows or shrinks past their current plan's range, CrewSignal will contact Client before moving them to the correct tier. No client is moved to a higher tier without being told first.</li>
+      </ul>
+    </div>
+
+    <div class="card">
+      <h2>4. Cancellation</h2>
+      <ul>
+        <li>Either party may cancel at any time by notifying the other in writing (email is sufficient).</li>
+        <li>Cancellation takes effect at the end of the current billing cycle. CrewSignal does not provide partial-month refunds for a cycle already in progress.</li>
+        <li>Once cancelled, review-request sending stops at the end of that billing cycle. Client's historical send/click data is retained for a reasonable period afterward in case Client wants to reactivate, and can be deleted sooner on request.</li>
+      </ul>
+    </div>
+
+    <div class="card">
+      <h2>5. What Client is responsible for</h2>
+      <p>Same standard already laid out in our <a href="/terms.html">Terms &amp; Conditions</a> and <a href="/sms-terms.html">SMS Terms</a>: Client collects their own customers' phone numbers as part of doing business with them, discloses at the point of service that a one-time review-request text will follow, and only marks a job complete when ready for that message to go out. CrewSignal does not guarantee any specific number of reviews, ratings, or business outcomes.</p>
+    </div>
+
+    <form action="https://formspree.io/f/xvzjoqqv" method="POST">
+      <input type="text" name="_gotcha" style="display:none">
+      <input type="hidden" name="_subject" value="Service agreement signed">
+
+      <div class="field">
+        <label for="business">Business name</label>
+        <input type="text" id="business" name="business" required placeholder="J&amp;J Beauty Company">
+      </div>
+      <div class="field-row">
+        <div class="field">
+          <label for="name">Your name</label>
+          <input type="text" id="name" name="name" required placeholder="Stacy">
+        </div>
+        <div class="field">
+          <label for="email">Email on file with CrewSignal</label>
+          <input type="email" id="email" name="email" required placeholder="you@yourcompany.com">
+        </div>
+      </div>
+
+      <div class="field-row">
+        <div class="field">
+          <label for="plan">Plan</label>
+          <select id="plan" name="plan" required>
+            <option value="">Select a plan</option>
+            <option value="Solo - Founding Member ($49/mo)">Solo, Founding Member ($49/mo)</option>
+            <option value="Solo - Standard ($79/mo)">Solo, Standard ($79/mo)</option>
+            <option value="Team - Founding Member ($149/mo)">Team, Founding Member ($149/mo)</option>
+            <option value="Team - Standard ($249/mo)">Team, Standard ($249/mo)</option>
+            <option value="Business - Founding Member ($249/mo)">Business, Founding Member ($249/mo)</option>
+            <option value="Business - Standard ($399/mo)">Business, Standard ($399/mo)</option>
+            <option value="Custom / Enterprise">Custom / Enterprise (rate confirmed separately)</option>
+          </select>
+        </div>
+        <div class="field">
+          <label for="start_date">Billing start date</label>
+          <input type="date" id="start_date" name="start_date" required>
+        </div>
+      </div>
+
+      <div class="field">
+        <label for="setup_fee">Setup fee</label>
+        <select id="setup_fee" name="setup_fee" required>
+          <option value="">Select one</option>
+          <option value="$300 one-time setup fee applies">$300 one-time setup fee applies</option>
+          <option value="Setup fee waived">Setup fee waived</option>
+        </select>
+      </div>
+
+      <div class="check-row">
+        <input type="checkbox" id="agree1" name="agree_terms" value="yes" required>
+        <label for="agree1">I've read and agree to this Service Agreement along with CrewSignal's <a href="/terms.html" target="_blank">Terms &amp; Conditions</a>, <a href="/privacy.html" target="_blank">Privacy Policy</a>, and <a href="/sms-terms.html" target="_blank">SMS Terms</a>.</label>
+      </div>
+
+      <button type="submit" class="btn">Confirm &amp; Sign Agreement</button>
+      <p class="fineprint">Submitting this form records your agreement with a timestamp and emails a copy to CrewSignal. Questions first? Email <a href="mailto:hello@getcrewsignal.com">hello@getcrewsignal.com</a>.</p>
+    </form>
+  </div>
+</main>
+
+<footer class="site">
+  <div class="wrap">
+    <p>&copy; 2026 CrewSignal, a service of MylesHouse Technologies LLC, Tennessee, USA. Contact: hello@getcrewsignal.com</p>
+  </div>
+</footer>
+
+</body>
+</html>
