@@ -12,22 +12,42 @@
 <meta name="description" content="CrewSignal automatically sends a Google review request by text after every completed job. Built for contractors and service businesses. Works with Square and QuickBooks Online today, with new integrations built around what our clients actually use.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;600;700;800;900&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;600;700;800;900&family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@500;600&display=swap" rel="stylesheet">
 <style>
   :root {
-    --ink: #16191d;
-    --ink-soft: #3d444d;
-    --paper: #f4f1ea;
-    --paper-card: #fbfaf6;
-    --line: #d9d3c6;
-    --signal: #17827c;       /* CrewSignal teal, primary accent */
-    --signal-dark: #106560;
-    --steel: #174e8e;        /* CrewSignal navy, secondary accent */
+    /* Dark "signal" ground -- the opening/closing statement, matching the
+       logo's own dark navy badge and the brand-concept art (deep navy,
+       glowing teal wifi-arc, star-field). */
+    --ground: #0a0e18;
+    --ground-raised: #0f1524;
+    --ground-line: rgba(255,255,255,.09);
+    --mist: #aab6c9;
+    --mist-dim: #6b7688;
+
+    /* Paper -- kept from the existing brand, carries the informational
+       body of the page. Same warm cream the dashboard's light cards use,
+       so the site and the product still visually agree. */
+    --paper: #f5f2ea;
+    --paper-card: #fcfbf7;
+    --line: #e3ddd0;
+    --ink: #14171c;
+    --ink-soft: #4c5460;
+
+    /* Accent system -- pulled directly from the new mark: the wifi-wave's
+       mint-teal, the "C" glass gradient's steel blue. */
+    --signal: #29d6b3;
+    --signal-dark: #0f9c82;
+    --signal-glow: rgba(41,214,179,.35);
+    --steel: #4f8fe0;
+    --steel-dark: #2f5fb0;
     --good: #1f7a44;
+
     --shadow: 0 1px 0 rgba(0,0,0,.04), 0 8px 28px -18px rgba(0,0,0,.35);
+    --glow-card: 0 0 0 1px rgba(41,214,179,.08), 0 16px 40px -20px rgba(10,14,24,.35);
   }
   * { box-sizing: border-box; margin: 0; padding: 0; }
   html { scroll-behavior: smooth; }
+  @media (prefers-reduced-motion: reduce){ html { scroll-behavior: auto; } }
   body {
     font-family: 'Inter', system-ui, sans-serif;
     color: var(--ink);
@@ -35,101 +55,135 @@
     line-height: 1.6;
     -webkit-font-smoothing: antialiased;
   }
-  h1,h2,h3,.display { font-family: 'Archivo', system-ui, sans-serif; letter-spacing: -0.02em; line-height: 1.02; }
-  .wrap { max-width: 1080px; margin: 0 auto; padding: 0 24px; }
+  h1,h2,h3,.display { font-family: 'Archivo', system-ui, sans-serif; letter-spacing: -0.02em; line-height: 1.04; text-wrap: balance; }
+  .mono { font-family: 'IBM Plex Mono', 'SF Mono', monospace; }
+  .wrap { max-width: 1120px; margin: 0 auto; padding: 0 24px; }
   a { color: inherit; }
 
   /* ---- top bar ---- */
   header.bar {
     position: sticky; top: 0; z-index: 50;
-    background: rgba(244,241,234,.88);
-    backdrop-filter: blur(8px);
-    border-bottom: 1px solid var(--line);
+    background: rgba(10,14,24,.82);
+    backdrop-filter: blur(10px);
+    border-bottom: 1px solid var(--ground-line);
   }
-  .bar-inner { display: flex; align-items: center; justify-content: space-between; height: 64px; }
-  .logo { font-family: 'Archivo'; font-weight: 900; font-size: 1.35rem; letter-spacing: -0.04em; display:flex; align-items:center; gap:9px; }
-  .logo .mark {
-    width: 26px; height: 26px; border-radius: 6px;
-    background: var(--signal); position: relative; flex: none;
-    box-shadow: inset 0 0 0 2px rgba(0,0,0,.08);
-  }
-  .logo .mark::before, .logo .mark::after {
-    content:''; position:absolute; border: 2.5px solid #fff; border-radius: 50%;
-    top:50%; left:50%; transform: translate(-50%,-50%);
-  }
-  .logo .mark::before { width: 7px; height: 7px; }
-  .logo .mark::after { width: 15px; height: 15px; opacity:.55; }
-  .logo img { height: 34px; width: auto; display: block; }
-  nav.links { display: flex; gap: 28px; align-items: center; font-size: .94rem; font-weight: 500; }
-  nav.links a { text-decoration: none; color: var(--ink-soft); }
-  nav.links a:hover { color: var(--ink); }
+  .bar-inner { display: flex; align-items: center; justify-content: space-between; min-height: 68px; padding: 10px 0; flex-wrap: wrap; gap: 10px 16px; }
+  .logo { font-family: 'Archivo'; font-weight: 900; font-size: 1.32rem; letter-spacing: -0.03em; display:flex; align-items:center; gap:10px; color: #fff; }
+  .logo img { height: 38px; width: 38px; display: block; border-radius: 50%; }
+  .logo .crew { color: #fff; }
+  .logo .signal { color: var(--signal); }
+  nav.links { display: flex; gap: 30px; align-items: center; font-size: .93rem; font-weight: 500; }
+  nav.links a { text-decoration: none; color: var(--mist); transition: color .15s ease; }
+  nav.links a:hover { color: #fff; }
   .btn {
-    display: inline-block; background: var(--signal); color: #fff; text-decoration: none;
+    display: inline-block; background: var(--signal); color: #06120f; text-decoration: none;
     font-weight: 700; font-family:'Archivo'; padding: 11px 20px; border-radius: 8px;
-    border: none; cursor: pointer; font-size: .95rem; transition: transform .08s ease, background .15s ease;
-    box-shadow: 0 1px 0 rgba(0,0,0,.12);
+    border: none; cursor: pointer; font-size: .95rem; transition: transform .08s ease, background .15s ease, box-shadow .15s ease;
   }
-  .btn:hover { background: var(--signal-dark); transform: translateY(-1px); }
-  .btn.ghost { background: transparent; color: var(--ink); box-shadow: inset 0 0 0 1.5px var(--ink); }
-  .btn.ghost:hover { background: var(--ink); color: var(--paper); }
+  .btn:hover { background: #3ee8c3; transform: translateY(-1px); box-shadow: 0 4px 22px -6px var(--signal-glow); }
+  .btn.ghost { background: transparent; color: #fff; box-shadow: inset 0 0 0 1.5px rgba(255,255,255,.35); }
+  .btn.ghost:hover { background: rgba(255,255,255,.08); box-shadow: inset 0 0 0 1.5px rgba(255,255,255,.6); }
+  .btn.dark { background: var(--ink); color: var(--paper); }
+  .btn.dark:hover { background: #2a2f37; }
   @media (max-width: 720px){ nav.links a:not(.btn){ display:none; } }
   .btn-short { display:none; }
   @media (max-width: 400px){ .btn-full { display:none; } .btn-short { display:inline; } }
+  @media (max-width: 420px){
+    .logo { font-size: 1.08rem; gap: 8px; }
+    .logo img { height: 32px; width: 32px; }
+    nav.links { gap: 10px; }
+    nav.links a.btn.ghost { display: none; }
+    .btn { padding: 10px 16px; font-size: .88rem; }
+  }
+
+  /* ---- dark canvas (hero + integrations) ---- */
+  .dark-zone {
+    background:
+      radial-gradient(ellipse 900px 520px at 82% -8%, rgba(41,214,179,.16), transparent 62%),
+      radial-gradient(ellipse 700px 500px at 8% 110%, rgba(79,143,224,.12), transparent 60%),
+      linear-gradient(180deg, var(--ground) 0%, var(--ground-raised) 100%);
+    color: #fff;
+    position: relative;
+    overflow: hidden;
+  }
+  .stars {
+    position: absolute; inset: 0; pointer-events: none; opacity: .5;
+    background-image: radial-gradient(rgba(255,255,255,.55) 1px, transparent 1.5px);
+    background-size: 34px 34px;
+    background-position: 6px 10px;
+    mask-image: radial-gradient(ellipse 900px 600px at 78% 0%, black, transparent 75%);
+  }
+  .signal-arcs { position: absolute; top: -60px; right: -40px; width: 480px; height: 480px; pointer-events: none; }
+  .signal-arcs path { fill: none; stroke: var(--signal); stroke-linecap: round; opacity: .55; filter: drop-shadow(0 0 10px var(--signal-glow)); }
+  @media (prefers-reduced-motion: no-preference){
+    .signal-arcs path { animation: pulse 4.5s ease-in-out infinite; }
+    .signal-arcs path:nth-child(2) { animation-delay: .35s; }
+    .signal-arcs path:nth-child(3) { animation-delay: .7s; }
+  }
+  @keyframes pulse { 0%,100% { opacity:.35; } 50% { opacity:.75; } }
 
   /* ---- hero ---- */
-  .hero { padding: 76px 0 36px; }
-  .eyebrow-row { display:flex; flex-wrap:wrap; gap:10px; margin-bottom: 22px; }
+  .hero { padding: 84px 0 40px; position: relative; }
+  .eyebrow-row { display:flex; flex-wrap:wrap; gap:10px; margin-bottom: 24px; }
   .eyebrow {
-    display:inline-flex; align-items:center; gap:8px; font-family:'Archivo'; font-weight:700;
-    font-size:.74rem; letter-spacing:.14em; text-transform:uppercase; color: var(--signal-dark);
-    background: #e3f5f3; border:1px solid #bfe4e0; padding:5px 11px; border-radius: 100px;
+    display:inline-flex; align-items:center; gap:8px; font-family:'IBM Plex Mono'; font-weight:500;
+    font-size:.72rem; letter-spacing:.06em; color: #d6f5ec;
+    background: rgba(41,214,179,.1); border:1px solid rgba(41,214,179,.35); padding:6px 12px; border-radius: 100px;
   }
-  .eyebrow.blue { color: var(--steel); background: #e8f1ff; border-color: #bcdcff; }
-  .hero h1 { font-size: clamp(2.6rem, 6vw, 4.4rem); font-weight: 900; max-width: 14ch; }
+  .eyebrow.blue { color: #d9e8ff; background: rgba(79,143,224,.12); border-color: rgba(79,143,224,.4); }
+  .hero h1 { font-size: clamp(2.6rem, 6vw, 4.5rem); font-weight: 900; max-width: 14ch; color: #fff; text-shadow: 0 0 46px rgba(41,214,179,.18); }
   .hero h1 em { font-style: normal; color: var(--signal); }
-  .hero .sub { font-size: clamp(1.05rem, 2vw, 1.28rem); color: var(--ink-soft); max-width: 52ch; margin-top: 22px; }
+  .hero .sub { font-size: clamp(1.05rem, 2vw, 1.24rem); color: var(--mist); max-width: 52ch; margin-top: 22px; }
   .hero-cta { display:flex; gap:14px; margin-top: 34px; flex-wrap: wrap; }
-  .hero-note { margin-top:18px; font-size:.88rem; color: var(--ink-soft); }
+  .hero-note { margin-top:20px; font-size:.86rem; color: var(--mist-dim); }
 
   /* ---- the text-message signature ---- */
-  .flow { display: grid; grid-template-columns: 1.1fr .9fr; gap: 48px; align-items: center; margin-top: 14px; }
+  .flow { display: grid; grid-template-columns: 1.1fr .9fr; gap: 48px; align-items: center; margin-top: 14px; position: relative; z-index: 1; }
   @media (max-width: 860px){ .flow { grid-template-columns: 1fr; gap: 36px; } }
+  .phone-halo { position: relative; max-width: 320px; margin: 0 auto; width: 100%; }
+  .phone-halo::before {
+    content: ''; position: absolute; inset: -30px; z-index: -1; border-radius: 50%;
+    background: radial-gradient(ellipse at center, var(--signal-glow), transparent 68%);
+    filter: blur(6px);
+  }
   .phone {
-    background: var(--ink); border-radius: 26px; padding: 14px; box-shadow: var(--shadow);
-    max-width: 320px; margin: 0 auto; width: 100%;
+    background: #11151d; border-radius: 26px; padding: 14px; box-shadow: var(--shadow);
+    border: 1px solid rgba(255,255,255,.08);
   }
   .phone .screen { background: #0c0e11; border-radius: 16px; padding: 18px 14px 22px; }
-  .phone .top { display:flex; justify-content:space-between; align-items:center; color:#8a929c; font-size:.72rem; margin-bottom: 14px; padding: 0 4px; }
+  .phone .top { display:flex; justify-content:space-between; align-items:center; color:#8a929c; font-size:.72rem; margin-bottom: 14px; padding: 0 4px; font-family: 'IBM Plex Mono'; }
   .bubble {
     background: #26303a; color: #f1f4f7; border-radius: 16px 16px 16px 4px;
     padding: 12px 14px; font-size: .9rem; line-height: 1.45; max-width: 88%;
   }
-  .bubble .link { color: #5fb0ff; word-break: break-all; }
+  .bubble .link { color: #5fd6c4; word-break: break-all; }
   .bubble .stop { display:block; margin-top:8px; color:#8a929c; font-size:.76rem; }
-  .sender { color:#8a929c; font-size:.72rem; margin: 0 0 6px 4px; }
+  .sender { color:#8a929c; font-size:.72rem; margin: 0 0 6px 4px; font-family: 'IBM Plex Mono'; }
   .reply { text-align:right; margin-top:10px; }
   .reply .bubble { background: var(--steel); border-radius: 16px 16px 4px 16px; display:inline-block; color:#fff; }
 
   /* ---- section scaffolding ---- */
-  section { padding: 64px 0; }
-  .sec-head { max-width: 60ch; margin-bottom: 40px; }
-  .sec-head .kicker { font-family:'Archivo'; font-weight:700; font-size:.78rem; letter-spacing:.14em; text-transform:uppercase; color: var(--ink-soft); }
-  .sec-head h2 { font-size: clamp(1.8rem, 3.5vw, 2.6rem); font-weight: 800; margin-top: 10px; }
+  section { padding: 68px 0; }
+  .sec-head { max-width: 60ch; margin-bottom: 42px; }
+  .sec-head .kicker { font-family:'IBM Plex Mono'; font-weight:600; font-size:.76rem; letter-spacing:.1em; text-transform:uppercase; color: var(--signal-dark); }
+  .dark-zone .sec-head .kicker { color: #7fe8d2; }
+  .sec-head h2 { font-size: clamp(1.8rem, 3.5vw, 2.55rem); font-weight: 800; margin-top: 10px; }
   .sec-head p { color: var(--ink-soft); margin-top: 12px; font-size: 1.05rem; }
-  .alt { background: var(--paper-card); border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
+  .paper-alt { background: var(--paper-card); border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
 
   /* ---- how it works: a real sequence, so numbered is honest ---- */
   .steps { display: grid; grid-template-columns: repeat(4, 1fr); gap: 18px; }
   @media (max-width: 860px){ .steps { grid-template-columns: 1fr 1fr; } }
   @media (max-width: 480px){ .steps { grid-template-columns: 1fr; } }
-  .step { background: var(--paper-card); border:1px solid var(--line); border-radius: 12px; padding: 22px; position: relative; }
-  .step .n { font-family:'Archivo'; font-weight:900; font-size:1.1rem; color:#fff; background:var(--ink); width:30px; height:30px; border-radius:7px; display:flex; align-items:center; justify-content:center; margin-bottom:14px; }
+  .step { background: var(--paper-card); border:1px solid var(--line); border-radius: 12px; padding: 22px; position: relative; box-shadow: var(--glow-card); transition: transform .18s ease, box-shadow .18s ease; }
+  .step:hover { transform: translateY(-3px); box-shadow: 0 0 0 1px rgba(41,214,179,.28), 0 18px 34px -18px rgba(10,14,24,.35); }
+  .step .n { font-family:'IBM Plex Mono'; font-weight:600; font-size:1rem; color:#eafff9; background:var(--ink); width:30px; height:30px; border-radius:7px; display:flex; align-items:center; justify-content:center; margin-bottom:14px; }
   .step h3 { font-size: 1.05rem; font-weight: 700; }
   .step p { color: var(--ink-soft); font-size: .92rem; margin-top: 6px; }
 
   /* ---- google review preview ---- */
   .review-preview-wrap { display:flex; justify-content:center; }
-  .g-top { display:flex; justify-content:space-between; align-items:center; color:#e8eaed; font-size:.72rem; font-weight:600; margin-bottom:14px; padding:0 2px; }
+  .g-top { display:flex; justify-content:space-between; align-items:center; color:#e8eaed; font-size:.72rem; font-weight:600; margin-bottom:14px; padding:0 2px; font-family:'IBM Plex Mono'; }
   .g-top .g-icons { color:#8a929c; letter-spacing:2px; }
   .g-bar { display:flex; align-items:center; gap:14px; margin-bottom:18px; padding:0 2px; }
   .g-bar .g-back { color:#e8eaed; font-size:1.1rem; }
@@ -138,51 +192,52 @@
   .g-avatar { width:38px; height:38px; border-radius:50%; background:#5a3d1f; color:#f4d9a8; display:flex; align-items:center; justify-content:center; font-family:'Archivo'; font-weight:700; font-size:1.05rem; flex:none; }
   .g-name { color:#e8eaed; font-size:.94rem; font-weight:600; }
   .g-posting { color:#8a929c; font-size:.76rem; margin-top:2px; display:flex; align-items:center; gap:5px; }
-  .g-stars { display:flex; gap:10px; padding:6px 2px 20px; font-size:1.6rem; color:#8a929c; letter-spacing:2px; }
+  .g-stars { display:flex; gap:10px; padding:6px 2px 20px; font-size:1.6rem; color: var(--signal); letter-spacing:2px; }
   .g-box { border:1px solid #3a4048; border-radius:10px; padding:16px; color:#c2c8d0; font-size:.9rem; line-height:1.5; margin:0 2px 18px; min-height:64px; }
   .g-photos { display:inline-flex; align-items:center; gap:8px; color:#8fbfff; background:#1c2733; border-radius:100px; padding:11px 18px; font-size:.88rem; font-weight:600; margin:0 2px 26px; }
   .g-post { text-align:center; color:#5b6169; font-size:.94rem; font-weight:600; padding:12px; border-radius:100px; background:#22272c; margin: 0 2px; }
 
   /* ---- integrations band ---- */
-  .integrations-band { background: var(--ink); padding: 48px 0; }
-  .integrations-band .kicker { color: #8a929c; }
+  .integrations-band { padding: 52px 0 64px; position: relative; z-index: 1; }
+  .integrations-band .kicker { color: #7fe8d2; }
   .integrations-band h2 { color: #fff; font-size: clamp(1.5rem, 3vw, 2rem); font-weight: 800; margin-top: 8px; }
-  .integrations-band p { color: #c2c8d0; margin-top: 10px; max-width: 60ch; }
+  .integrations-band p { color: var(--mist); margin-top: 10px; max-width: 60ch; }
   .integration-pills { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 26px; }
   .integration-pill {
-    display: inline-flex; align-items: center; gap: 9px; background: #22272c; border: 1px solid #363c44;
+    display: inline-flex; align-items: center; gap: 9px; background: rgba(255,255,255,.04); border: 1px solid var(--ground-line);
     color: #fff; font-family: 'Archivo'; font-weight: 700; font-size: .95rem; padding: 12px 20px; border-radius: 10px;
   }
-  .integration-pill .dot { width: 8px; height: 8px; border-radius: 50%; background: var(--good); flex: none; }
-  .integration-pill.soon .dot { background: #c79100; }
-  .integration-pill.open { background: transparent; border: 1.5px dashed #4a515a; color: #c2c8d0; font-weight: 600; }
+  .integration-pill .dot { width: 8px; height: 8px; border-radius: 50%; background: var(--signal); box-shadow: 0 0 8px var(--signal-glow); flex: none; }
+  .integration-pill.soon .dot { background: #e0b23e; box-shadow: 0 0 8px rgba(224,178,62,.5); }
+  .integration-pill.open { background: transparent; border: 1.5px dashed rgba(255,255,255,.22); color: var(--mist); font-weight: 600; }
 
-  /* ---- who it's for ---- */
+  /* ---- who it's for / control / why it matters (card grids) ---- */
   .who { display:grid; grid-template-columns: 1fr 1fr; gap: 20px; }
   @media (max-width: 720px){ .who { grid-template-columns: 1fr; } }
-  .who-card { border:1px solid var(--line); border-radius:14px; padding:28px; background: var(--paper-card); }
+  .who-card { border:1px solid var(--line); border-radius:14px; padding:28px; background: var(--paper-card); box-shadow: var(--glow-card); }
   .who-card h3 { font-size:1.25rem; font-weight:800; }
-  .who-card .tag { font-family:'Archivo'; font-weight:700; font-size:.72rem; letter-spacing:.12em; text-transform:uppercase; color: var(--signal-dark); }
+  .who-card .tag { font-family:'IBM Plex Mono'; font-weight:600; font-size:.7rem; letter-spacing:.08em; text-transform:uppercase; color: var(--signal-dark); }
   .who-card ul { list-style:none; margin-top:14px; }
   .who-card li { padding:6px 0 6px 26px; position:relative; color: var(--ink-soft); font-size:.96rem; }
-  .who-card li::before { content:''; position:absolute; left:2px; top:13px; width:10px; height:10px; border-radius:3px; background: var(--signal); }
+  .who-card li::before { content:''; position:absolute; left:2px; top:13px; width:9px; height:9px; border-radius:3px; background: var(--signal); }
 
-  /* ---- trust strip ---- */
+  /* ---- trust strip (dark) ---- */
+  .trust-band { padding: 44px 0; }
   .trust { display:flex; flex-wrap:wrap; gap:14px; }
   .trust .chip {
-    font-family:'Archivo'; font-weight:600; font-size:.86rem; color: var(--ink);
-    background: var(--paper-card); border:1px solid var(--line); padding:9px 15px; border-radius:100px;
+    font-family:'IBM Plex Mono'; font-weight:500; font-size:.82rem; color: #fff;
+    background: rgba(255,255,255,.05); border:1px solid var(--ground-line); padding:9px 15px; border-radius:100px;
     display:inline-flex; align-items:center; gap:8px;
   }
-  .trust .chip .dot { width:8px; height:8px; border-radius:50%; background: var(--good); }
-  .trust .chip.soon .dot { background:#c79100; }
+  .trust .chip .dot { width:8px; height:8px; border-radius:50%; background: var(--signal); box-shadow: 0 0 8px var(--signal-glow); }
+  .trust .chip.soon .dot { background:#e0b23e; box-shadow: 0 0 8px rgba(224,178,62,.5); }
 
   /* ---- FAQ ---- */
   .faq details { border-bottom:1px solid var(--line); padding: 18px 0; }
   .faq summary { font-family:'Archivo'; font-weight:700; font-size:1.05rem; cursor:pointer; list-style:none; display:flex; justify-content:space-between; align-items:center; gap:16px; }
   .faq summary::-webkit-details-marker { display:none; }
-  .faq summary::after { content:'+'; font-weight:700; color: var(--signal); font-size:1.4rem; flex:none; }
-  .faq details[open] summary::after { content:'–'; }
+  .faq summary::after { content:'+'; font-weight:700; color: var(--signal-dark); font-size:1.4rem; flex:none; }
+  .faq details[open] summary::after { content:'\2212'; }
   .faq p { color: var(--ink-soft); margin-top:12px; font-size:.98rem; max-width:70ch; }
 
   /* ---- contact ---- */
@@ -199,23 +254,20 @@
   form .btn { width:100%; margin-top:6px; padding:13px; }
 
   /* ---- footer ---- */
-  footer.site { background: var(--ink); color: #c2c8d0; padding: 48px 0 36px; }
+  footer.site { padding: 52px 0 36px; position: relative; z-index: 1; }
   footer.site .cols { display:flex; justify-content:space-between; flex-wrap:wrap; gap:28px; }
-  footer.site .logo { color:#fff; }
-  footer.site .logo .crew { color:#6fa3d8; }
-  footer.site .logo .signal { color:#5fc4bd; }
-  footer.site a { color:#c2c8d0; text-decoration:none; }
+  footer.site a { color: var(--mist); text-decoration:none; }
   footer.site a:hover { color:#fff; }
   footer.site nav { display:flex; gap:22px; flex-wrap:wrap; font-size:.92rem; }
-  footer.site .legal { margin-top:30px; padding-top:22px; border-top:1px solid #2a2f36; font-size:.82rem; color:#8a929c; max-width:75ch; }
-  @media (prefers-reduced-motion: reduce){ * { scroll-behavior:auto; transition:none !important; } }
+  footer.site .legal { margin-top:30px; padding-top:22px; border-top:1px solid var(--ground-line); font-size:.82rem; color: var(--mist-dim); max-width:75ch; }
+  @media (prefers-reduced-motion: reduce){ * { transition:none !important; animation:none !important; } }
 </style>
 </head>
 <body>
 
 <header class="bar">
   <div class="wrap bar-inner">
-    <div class="logo"><img src="/assets/CombinedLogo-transparent.png" alt="CrewSignal"></div>
+    <div class="logo"><img src="/CrewSignal-logo-transparent.png" alt="CrewSignal"><span><span class="crew">Crew</span><span class="signal">Signal</span></span></div>
     <nav class="links">
       <a href="#how">How it works</a>
       <a href="#who">Who it's for</a>
@@ -226,64 +278,75 @@
   </div>
 </header>
 
-<!-- HERO -->
-<section class="hero">
-  <div class="wrap">
-    <div class="eyebrow-row">
-      <span class="eyebrow">★ Automated reputation for the trades</span>
-      <span class="eyebrow blue">🔌 Works with what you already use</span>
-    </div>
-    <div class="flow">
-      <div>
-        <h1>More Google reviews. <em>Zero follow-up.</em></h1>
-        <p class="sub">Your customers are thrilled the second the job's done, then they drive off, life happens, and they forget you exist. CrewSignal automatically sends a branded Google review request after every completed job, timed the way you want, so you stop relying on your crew to remember and your customers to follow through.</p>
-        <div class="hero-cta">
-          <a href="#contact" class="btn">Request Demo &amp; Pricing</a>
-          <a href="#how" class="btn ghost">See how it works</a>
-        </div>
-        <p class="hero-note">Built for contractors &amp; service businesses · Works with Square &amp; QuickBooks Online today · New integrations built around what you use · Built with consent &amp; opt-out safeguards</p>
-      </div>
+<div class="dark-zone">
+  <div class="stars" aria-hidden="true"></div>
+  <svg class="signal-arcs" viewBox="0 0 200 200" aria-hidden="true">
+    <path d="M120 150 A 70 70 0 0 1 170 90" stroke-width="7"/>
+    <path d="M108 138 A 90 90 0 0 1 176 62" stroke-width="7"/>
+    <path d="M96 126 A 112 112 0 0 1 182 34" stroke-width="7"/>
+  </svg>
 
-      <!-- signature element: the actual text a customer receives -->
-      <div class="phone" role="img" aria-label="Example review request text message a customer receives">
-        <div class="screen">
-          <div class="top"><span>Messages</span><span>now</span></div>
-          <p class="sender">CrewSignal · (629) 289-1997</p>
-          <div class="bubble">
-            Hi Jordan, thanks for choosing Rutherford Roofing! We'd love your feedback, leave us a quick Google review here: <span class="link">g.page/r/rutherford</span>
-            <span class="stop">Reply STOP to opt out</span>
+  <!-- HERO -->
+  <section class="hero">
+    <div class="wrap">
+      <div class="eyebrow-row">
+        <span class="eyebrow">&#9733; AUTOMATED REPUTATION FOR THE TRADES</span>
+        <span class="eyebrow blue">WORKS WITH WHAT YOU ALREADY USE</span>
+      </div>
+      <div class="flow">
+        <div>
+          <h1>More Google reviews. <em>Zero follow-up.</em></h1>
+          <p class="sub">Your customers are thrilled the second the job's done, then they drive off, life happens, and they forget you exist. CrewSignal automatically sends a branded Google review request after every completed job, timed the way you want, so you stop relying on your crew to remember and your customers to follow through.</p>
+          <div class="hero-cta">
+            <a href="#contact" class="btn">Request Demo &amp; Pricing</a>
+            <a href="#how" class="btn ghost">See how it works</a>
           </div>
-          <div class="reply"><span class="bubble">Just left you 5 stars! ⭐️</span></div>
+          <p class="hero-note">Built for contractors &amp; service businesses &middot; Works with Square &amp; QuickBooks Online today &middot; New integrations built around what you use &middot; Built with consent &amp; opt-out safeguards</p>
+        </div>
+
+        <!-- signature element: the actual text a customer receives -->
+        <div class="phone-halo">
+          <div class="phone" role="img" aria-label="Example review request text message a customer receives">
+            <div class="screen">
+              <div class="top"><span>Messages</span><span>now</span></div>
+              <p class="sender">CrewSignal &middot; (629) 289-1997</p>
+              <div class="bubble">
+                Hi Jordan, thanks for choosing Rutherford Roofing! We'd love your feedback, leave us a quick Google review here: <span class="link">g.page/r/rutherford</span>
+                <span class="stop">Reply STOP to opt out</span>
+              </div>
+              <div class="reply"><span class="bubble">Just left you 5 stars! &#11088;</span></div>
+            </div>
+          </div>
         </div>
       </div>
     </div>
-  </div>
-</section>
+  </section>
 
-<!-- INTEGRATIONS -->
-<section class="integrations-band">
-  <div class="wrap">
-    <div class="kicker">Integrations</div>
-    <h2>Works with what you already run.</h2>
-    <p>No new software to learn, no data entry, no switching how you take payments or track jobs. CrewSignal plugs into the tools you're already using.</p>
-    <div class="integration-pills">
-      <span class="integration-pill"><span class="dot"></span>Square</span>
-      <span class="integration-pill"><span class="dot"></span>QuickBooks Online</span>
-      <span class="integration-pill soon"><span class="dot"></span>Wave (private beta)</span>
-      <span class="integration-pill open">+ Jobber</span>
-      <span class="integration-pill open">+ Housecall Pro</span>
-      <span class="integration-pill open">+ ServiceTitan</span>
-      <span class="integration-pill open">+ JobNimbus</span>
-      <span class="integration-pill open">+ tell us what you use (customer demand drives our roadmap)</span>
+  <!-- INTEGRATIONS -->
+  <section class="integrations-band">
+    <div class="wrap">
+      <div class="kicker">INTEGRATIONS</div>
+      <h2>Works with what you already run.</h2>
+      <p>No new software to learn, no data entry, no switching how you take payments or track jobs. CrewSignal plugs into the tools you're already using.</p>
+      <div class="integration-pills">
+        <span class="integration-pill"><span class="dot"></span>Square</span>
+        <span class="integration-pill"><span class="dot"></span>QuickBooks Online</span>
+        <span class="integration-pill soon"><span class="dot"></span>Wave (private beta)</span>
+        <span class="integration-pill open">+ Jobber</span>
+        <span class="integration-pill open">+ Housecall Pro</span>
+        <span class="integration-pill open">+ ServiceTitan</span>
+        <span class="integration-pill open">+ JobNimbus</span>
+        <span class="integration-pill open">+ tell us what you use (customer demand drives our roadmap)</span>
+      </div>
     </div>
-  </div>
-</section>
+  </section>
+</div>
 
 <!-- HOW IT WORKS -->
-<section id="how" class="alt">
+<section id="how">
   <div class="wrap">
     <div class="sec-head">
-      <div class="kicker">How it works</div>
+      <div class="kicker">HOW IT WORKS</div>
       <h2>Four steps. One of them is yours.</h2>
       <p>CrewSignal plugs into the software you already use to run jobs. After setup, the only step you do is the one you already do: finish the job.</p>
     </div>
@@ -297,17 +360,17 @@
 </section>
 
 <!-- WHAT THE CUSTOMER SEES -->
-<section id="preview" class="alt">
+<section id="preview" class="paper-alt">
   <div class="wrap">
     <div class="sec-head">
-      <div class="kicker">What they see</div>
+      <div class="kicker">WHAT THEY SEE</div>
       <h2>One tap, and they're already leaving the review.</h2>
       <p>The link in the text drops your customer straight into Google's own review screen for your business. No app to download, no account to create, nothing for them to figure out.</p>
     </div>
     <div class="review-preview-wrap">
       <div class="phone" role="img" aria-label="Example of Google's review screen a customer sees after tapping the link">
         <div class="screen">
-          <div class="g-top"><span>8:09</span><span class="g-icons">•••</span></div>
+          <div class="g-top"><span>8:09</span><span class="g-icons">&bull;&bull;&bull;</span></div>
           <div class="g-bar"><span class="g-back">&#8592;</span><span class="g-title">Your Company</span></div>
           <div class="g-reviewer">
             <div class="g-avatar">J</div>
@@ -330,13 +393,13 @@
 <section id="control">
   <div class="wrap">
     <div class="sec-head">
-      <div class="kicker">You're in control</div>
+      <div class="kicker">YOU'RE IN CONTROL</div>
       <h2>Automatic doesn't mean uncontrolled.</h2>
       <p>Every contractor we've talked to asks the same thing: "What if I don't want a robot texting my customers with no oversight at all?" Fair. Here's how it actually works.</p>
     </div>
     <div class="who">
       <div class="who-card">
-        <span class="tag">How the timing works</span>
+        <span class="tag">HOW THE TIMING WORKS</span>
         <h3>You decide when "complete" means complete</h3>
         <ul>
           <li>CrewSignal only sends a text when YOU mark the job complete in your CRM, not before</li>
@@ -345,7 +408,7 @@
         </ul>
       </div>
       <div class="who-card">
-        <span class="tag">Built-in protections</span>
+        <span class="tag">BUILT-IN PROTECTIONS</span>
         <h3>More than just an on/off switch</h3>
         <ul>
           <li>Configurable send delay, so the text never feels instant or robotic</li>
@@ -359,16 +422,16 @@
 </section>
 
 <!-- WHO IT'S FOR -->
-<section id="who">
+<section id="who" class="paper-alt">
   <div class="wrap">
     <div class="sec-head">
-      <div class="kicker">Who it's for</div>
+      <div class="kicker">WHO IT'S FOR</div>
       <h2>If you finish jobs and forget to ask, this is for you.</h2>
       <p>Doesn't matter if it's a $185 service call or a $35,000 deck build, the same thing happens. The job goes great, the customer's happy, and by the time they're in their car, the thought's gone.</p>
     </div>
     <div class="who">
       <div class="who-card">
-        <span class="tag">Field service contractors</span>
+        <span class="tag">FIELD SERVICE CONTRACTORS</span>
         <h3>Roofing, HVAC, plumbing, fencing &amp; decks</h3>
         <ul>
           <li>You already text customers for on-my-way alerts, scheduling, gate codes</li>
@@ -378,7 +441,7 @@
         </ul>
       </div>
       <div class="who-card">
-        <span class="tag">Service &amp; appointment businesses</span>
+        <span class="tag">SERVICE &amp; APPOINTMENT BUSINESSES</span>
         <h3>Salons, barbershops &amp; studios</h3>
         <ul>
           <li>Built-in cooldowns mean regulars aren't asked after every single visit</li>
@@ -392,28 +455,30 @@
 </section>
 
 <!-- TRUST -->
-<section class="alt" style="padding:44px 0;">
-  <div class="wrap trust">
-    <span class="chip"><span class="dot"></span>Built with consent &amp; opt-out safeguards</span>
-    <span class="chip"><span class="dot"></span>Every text includes STOP opt-out</span>
-    <span class="chip"><span class="dot"></span>Works with Square</span>
-    <span class="chip"><span class="dot"></span>Works with QuickBooks Online</span>
-    <span class="chip soon"><span class="dot"></span>Wave support in private beta</span>
-    <span class="chip"><span class="dot"></span>Carrier-registered sending number</span>
-  </div>
-</section>
+<div class="dark-zone">
+  <section class="trust-band">
+    <div class="wrap trust">
+      <span class="chip"><span class="dot"></span>Built with consent &amp; opt-out safeguards</span>
+      <span class="chip"><span class="dot"></span>Every text includes STOP opt-out</span>
+      <span class="chip"><span class="dot"></span>Works with Square</span>
+      <span class="chip"><span class="dot"></span>Works with QuickBooks Online</span>
+      <span class="chip soon"><span class="dot"></span>Wave support in private beta</span>
+      <span class="chip"><span class="dot"></span>Carrier-registered sending number</span>
+    </div>
+  </section>
+</div>
 
 <!-- WHY IT MATTERS -->
 <section id="why">
   <div class="wrap">
     <div class="sec-head">
-      <div class="kicker">Why it matters</div>
+      <div class="kicker">WHY IT MATTERS</div>
       <h2>More reviews build a stronger local reputation.</h2>
       <p>Reviews aren't just for looking good on the page. They shape whether a potential customer picks you over the business next to you.</p>
     </div>
     <div style="max-width:640px;">
       <div class="who-card">
-        <span class="tag">Google Search &amp; Maps</span>
+        <span class="tag">GOOGLE SEARCH &amp; MAPS</span>
         <h3>A factor Google says matters</h3>
         <ul>
           <li>Google says review count and positive ratings can help your ranking in local search and Maps results</li>
@@ -426,16 +491,16 @@
 </section>
 
 <!-- RELIABILITY / SAFEGUARDS -->
-<section id="reliability" class="alt">
+<section id="reliability" class="paper-alt">
   <div class="wrap">
     <div class="sec-head">
-      <div class="kicker">Under the hood</div>
+      <div class="kicker">UNDER THE HOOD</div>
       <h2>Automatic, without being reckless.</h2>
       <p>CrewSignal does more than fire off a text. Every completion event is checked before a request ever gets queued, and every request stays trackable after it's sent.</p>
     </div>
     <div class="who">
       <div class="who-card">
-        <span class="tag">Before it sends</span>
+        <span class="tag">BEFORE IT SENDS</span>
         <h3>Every request gets checked first</h3>
         <ul>
           <li>Duplicate completion events are detected and ignored, so a CRM retry never results in double-texting</li>
@@ -445,7 +510,7 @@
         </ul>
       </div>
       <div class="who-card">
-        <span class="tag">After it sends</span>
+        <span class="tag">AFTER IT SENDS</span>
         <h3>You can see it's actually working</h3>
         <ul>
           <li>Every review link is branded and individually tracked</li>
@@ -459,7 +524,7 @@
 </section>
 
 <!-- FAQ -->
-<section id="faq" class="alt">
+<section id="faq">
   <div class="wrap">
     <div class="sec-head">
       <div class="kicker">FAQ</div>
@@ -481,11 +546,11 @@
 </section>
 
 <!-- CONTACT -->
-<section id="contact">
+<section id="contact" class="paper-alt">
   <div class="wrap contact-grid">
     <div>
       <div class="sec-head" style="margin-bottom:18px;">
-        <div class="kicker">Get started</div>
+        <div class="kicker">GET STARTED</div>
         <h2>Request Demo &amp; Pricing</h2>
         <p>Tell us a bit about your business and we'll show you exactly how CrewSignal works for your trade. No pressure, no jargon.</p>
       </div>
@@ -511,7 +576,7 @@
           <label for="software">What software do you use to track jobs?</label>
           <input type="text" id="software" name="software" placeholder="Jobber, Square, QuickBooks, not sure…">
         </div>
-        <button type="submit" class="btn">Request Demo &amp; Pricing</button>
+        <button type="submit" class="btn dark">Request Demo &amp; Pricing</button>
         <p class="consent">This form requests a product demo only. Submitting this form does not enroll you in promotional SMS campaigns. We'll only contact you regarding your demo request. By submitting, you agree we may contact you about your request by email or phone. See our <a href="/privacy.html" style="color:var(--signal-dark);">Privacy Policy</a>.</p>
       </form>
     </div>
@@ -519,24 +584,26 @@
 </section>
 
 <!-- FOOTER -->
-<footer class="site">
-  <div class="wrap">
-    <div class="cols">
-      <div class="logo"><img src="/assets/CrewSignal-Icon-transparent.png" alt="CrewSignal"><span><span class="crew">Crew</span><span class="signal">Signal</span></span></div>
-      <nav>
-        <a href="#how">How it works</a>
-        <a href="#faq">FAQ</a>
-        <a href="#contact">Request Demo &amp; Pricing</a>
-        <a href="/privacy.html">Privacy Policy</a>
-        <a href="/terms.html">Terms &amp; Conditions</a>
-        <a href="/sms-terms.html">SMS Terms</a>
-      </nav>
+<div class="dark-zone">
+  <footer class="site">
+    <div class="wrap">
+      <div class="cols">
+        <div class="logo"><img src="/CrewSignal-logo-transparent.png" alt="CrewSignal"><span><span class="crew">Crew</span><span class="signal">Signal</span></span></div>
+        <nav>
+          <a href="#how">How it works</a>
+          <a href="#faq">FAQ</a>
+          <a href="#contact">Request Demo &amp; Pricing</a>
+          <a href="/privacy.html">Privacy Policy</a>
+          <a href="/terms.html">Terms &amp; Conditions</a>
+          <a href="/sms-terms.html">SMS Terms</a>
+        </nav>
+      </div>
+      <p class="legal">
+        &copy; 2026 CrewSignal, a service of MylesHouse Technologies LLC, Tennessee, USA. CrewSignal sends review-request text messages on behalf of service businesses to their own customers following a completed job for customers who have consented to receive SMS communications from the business. Every message includes opt-out instructions ("Reply STOP"). Message and data rates may apply. Contact: hello@getcrewsignal.com
+      </p>
     </div>
-    <p class="legal">
-      © 2026 CrewSignal, a service of MylesHouse Technologies LLC, Tennessee, USA. CrewSignal sends review-request text messages on behalf of service businesses to their own customers following a completed job for customers who have consented to receive SMS communications from the business. Every message includes opt-out instructions ("Reply STOP"). Message and data rates may apply. Contact: hello@getcrewsignal.com
-    </p>
-  </div>
-</footer>
+  </footer>
+</div>
 
 </body>
 </html>
