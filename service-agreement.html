@@ -61,11 +61,6 @@
   h1 { font-size: clamp(1.9rem, 4vw, 2.5rem); font-weight: 800; margin-top: 10px; }
   .intro { color: var(--ink-soft); margin-top: 16px; font-size: 1.02rem; }
 
-  .draft-notice {
-    background: #fdf3dc; border: 1px solid #e8cf8f; border-radius: 10px;
-    padding: 16px 18px; margin-top: 28px; font-size: .88rem; color: var(--ink);
-  }
-
   .card {
     background: var(--paper-card); border: 1px solid var(--line); border-radius: 14px;
     padding: 30px; margin-top: 24px; box-shadow: var(--shadow);
@@ -122,7 +117,6 @@
 
   @media print {
     header.bar, form, footer.site, .dark-zone-footer, .success-card, .error-msg { display: none; }
-    .draft-notice { display: none; }
     body { background: #fff; }
     .card { box-shadow: none; border: 1px solid #ccc; }
   }
@@ -141,10 +135,6 @@
     <div class="kicker">Before your first billing cycle</div>
     <h1>Service agreement</h1>
     <p class="intro">This confirms the actual terms of your paid CrewSignal plan: what you're paying, how billing works, and how to cancel if you ever need to. It works alongside our existing <a href="/terms.html">Terms &amp; Conditions</a>, <a href="/privacy.html">Privacy Policy</a>, and <a href="/sms-terms.html">SMS Terms</a>, which already cover consent responsibilities and don't need repeating here.</p>
-
-    <div class="draft-notice">
-      <strong>Internal note, not shown to the client:</strong> this has not been reviewed by an attorney yet (tracked separately, task 4.13a). Fine as a real, honest agreement to use starting now, but flag it for a real legal review once there's bandwidth, especially the liability and cancellation sections.
-    </div>
 
     <div class="card">
       <h2>1. The parties</h2>
