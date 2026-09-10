@@ -76,6 +76,8 @@
     background: #e3f5f3; border: 1px solid #bfe4e0; color: var(--signal-dark); font-size: .88rem; line-height: 1.5;
   }
   .notice.show { display: block; }
+  .notice.error { display: block; background: #fbe4e4; border-color: #f0c0c0; color: #b00020; margin-top: 14px; margin-bottom: 0; }
+  .notice.error[hidden] { display: none; }
 
   .dark-zone-footer {
     margin-top: auto;
@@ -114,12 +116,13 @@
         <label for="password">Password</label>
         <input type="password" id="password" name="password" autocomplete="current-password" placeholder="Enter your password">
       </div>
-      <a href="#" class="forgot" id="forgot-link">Forgot password?</a>
+      <a href="mailto:hello@getcrewsignal.com?subject=Forgot%20my%20CrewSignal%20password" class="forgot">Forgot password?</a>
       <div class="actions">
-        <button type="submit" class="btn primary">Login</button>
+        <button type="submit" class="btn primary" id="login-submit">Login</button>
         <a href="/index.html" class="btn cancel">Cancel</a>
       </div>
-      <p class="notice" id="login-notice">Client accounts aren't live yet. CrewSignal's client dashboard is on the way. In the meantime, reach us at <a href="mailto:hello@getcrewsignal.com" style="color:var(--signal-dark); font-weight:600;">hello@getcrewsignal.com</a>.</p>
+      <p class="notice error" id="login-error" hidden>Incorrect username or password.</p>
+      <p class="notice show">Don't have a login yet? Reach us at <a href="mailto:hello@getcrewsignal.com" style="color:var(--signal-dark); font-weight:600;">hello@getcrewsignal.com</a>.</p>
     </form>
   </div>
 </main>
@@ -139,19 +142,46 @@
 </div>
 
 <script>
-  // No backend exists for client accounts yet (added 2026-07-31, scaffolding
-  // only, per Brandon: "we don't have anything to log into yet, but this is
-  // the scaffolding for our Client Dashboard login"). The form intentionally
-  // never submits anywhere and never reads back what was typed anywhere else
-  // on the page - it just shows an honest "not live yet" message instead of
-  // pretending a login attempt succeeded or silently doing nothing.
+  // Real as of 2026-09-09 (task 17.2) - was pure scaffolding until now
+  // (added 2026-07-31, per Brandon: "we don't have anything to log into
+  // yet, but this is the scaffolding for our Client Dashboard login"). This
+  // page lives on getcrewsignal.com; the real login endpoint lives on the
+  // separate api.getcrewsignal.com subdomain - a cross-origin request, so
+  // credentials: 'include' is required for the session cookie to actually
+  // be set. Confirmed directly (not assumed) that this works: the two
+  // subdomains share a registrable domain, so the cookie's SameSite=Lax
+  // attribute treats this as same-site, and the API's CORS config already
+  // echoes back the real requesting origin with credentials allowed when
+  // allow_origins=["*"] and allow_credentials=True are both set (Starlette's
+  // actual behavior, verified with a real preflight request, not guessed).
+  var API_BASE = 'https://api.getcrewsignal.com';
+
   document.getElementById('login-form').addEventListener('submit', function (e) {
     e.preventDefault();
-    document.getElementById('login-notice').classList.add('show');
-  });
-  document.getElementById('forgot-link').addEventListener('click', function (e) {
-    e.preventDefault();
-    document.getElementById('login-notice').classList.add('show');
+    var btn = document.getElementById('login-submit');
+    var errorEl = document.getElementById('login-error');
+    btn.disabled = true;
+    btn.textContent = 'Logging in…';
+    errorEl.hidden = true;
+
+    fetch(API_BASE + '/api/v1/portal/login', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      credentials: 'include',
+      body: JSON.stringify({
+        email: document.getElementById('username').value,
+        password: document.getElementById('password').value,
+      }),
+    })
+      .then(function (res) {
+        if (!res.ok) { throw new Error('login failed'); }
+        window.location.href = API_BASE + '/api/v1/portal';
+      })
+      .catch(function () {
+        errorEl.hidden = false;
+        btn.disabled = false;
+        btn.textContent = 'Login';
+      });
   });
 </script>
 
