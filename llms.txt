@@ -3,16 +3,16 @@
 CrewSignal is a software platform that helps small service businesses, such as contractors, salons, and barbershops, automatically request Google reviews from their customers after a job is completed.
 
 ## What CrewSignal does
-After a business marks a job complete in their existing CRM or booking software (currently Square or QuickBooks Online, with Wave in private beta), CrewSignal automatically sends one text message to that customer with a thank-you and a link to leave a Google review. Businesses do not need to remember to ask, and customers are not contacted more than once per completed job.
+After a business marks a job complete in their existing CRM or booking software (currently Square, QuickBooks Online, or Wave), CrewSignal automatically sends one text message to that customer with a thank-you and a link to leave a Google review. Businesses do not need to remember to ask, and customers are not contacted more than once per completed job.
 
 ## Who it's for
 Field service contractors (roofing, HVAC, plumbing, fencing, decks) and appointment-based service businesses (salons, barbershops, studios) who want more Google reviews without manually following up with every customer.
 
 ## Key facts
-- Works with: Square, QuickBooks Online, and Wave (private beta)
+- Works with: Square, QuickBooks Online, and Wave
 - One message sent per completed job, never repeated for the same job
 - Every message includes a STOP opt-out instruction; replying START/UNSTOP/YES re-enables messages
-- Pricing is tailored to business size and job volume; available on request via a demo
+- Published tiered pricing based on team size: Solo (1-2 people), Team (3-7 people), and Business (8-12 people) plans, each with a standard rate and a discounted, life-of-account Founding Member rate for early customers. See the pricing section at getcrewsignal.com for current numbers.
 - Operated by Brandon Myles, Middle Tennessee, USA
 
 ## Pages
