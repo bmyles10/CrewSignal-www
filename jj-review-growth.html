@@ -9,7 +9,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>J&amp;J Review Growth | CrewSignal</title>
 <meta name="robots" content="noindex">
-<meta name="description" content="A real 52-day timeline of J&amp;J Beauty Company's Google review count since going live on CrewSignal.">
+<meta name="description" content="A real 60-day timeline of J&amp;J Beauty Company's Google review count since going live on CrewSignal.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@600;700;800;900&family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@500;600&display=swap" rel="stylesheet">
@@ -183,15 +183,15 @@
       <div class="stat-arrow">
         <span class="stat-num from">32</span>
         <span class="stat-arrow-glyph">&rarr;</span>
-        <span class="stat-num to">82</span>
+        <span class="stat-num to">87</span>
       </div>
-      <span class="stat-pct">+156%</span>
+      <span class="stat-pct">+172%</span>
     </div>
 
     <div class="hero-meta">
-      <span><strong>+50</strong> reviews</span>
-      <span><strong>52</strong> days tracked</span>
-      <span><strong>Jul 19 to Sep 8, 2026</strong></span>
+      <span><strong>+55</strong> reviews</span>
+      <span><strong>60</strong> days tracked</span>
+      <span><strong>Jul 19 to Sep 16, 2026</strong></span>
       <span><strong>Zero</strong> down days</span>
     </div>
   </div>
@@ -229,7 +229,7 @@
 <section class="callout">
   <div class="wrap">
     <div class="callout-card">
-      J&amp;J went live on CrewSignal 2026-07-11, but Google review-count tracking itself didn't begin until 2026-07-19, when the count was already 32. The first eight live days aren't reflected in this timeline. Data covers J&amp;J's one shared Google listing across all six connected stylists, deduplicated to a single daily reading per Google's own count. This is a point-in-time snapshot as of September 8, 2026, not a live-updating page.
+      J&amp;J went live on CrewSignal 2026-07-11, but Google review-count tracking itself didn't begin until 2026-07-19, when the count was already 32. The first eight live days aren't reflected in this timeline. Data covers J&amp;J's one shared Google listing across all six connected stylists, deduplicated to a single daily reading per Google's own count. This is a point-in-time snapshot as of September 16, 2026, not a live-updating page.
     </div>
   </div>
 </section>
@@ -247,7 +247,7 @@
 (function () {
   // Real data, pulled directly from production (review_count_snapshots),
   // one value per day (last reading of the day where multiple checks ran).
-  // Snapshot as of 2026-09-08 - this is a static report, not a live feed.
+  // Snapshot as of 2026-09-16 - this is a static report, not a live feed.
   var data = [
     ["2026-07-19",32],["2026-07-20",32],["2026-07-21",32],["2026-07-22",32],
     ["2026-07-23",33],["2026-07-24",34],["2026-07-25",35],["2026-07-26",35],
@@ -261,7 +261,9 @@
     ["2026-08-24",66],["2026-08-25",69],["2026-08-26",71],["2026-08-27",73],
     ["2026-08-28",73],["2026-08-29",76],["2026-08-30",76],["2026-08-31",76],
     ["2026-09-01",78],["2026-09-02",79],["2026-09-03",80],["2026-09-04",80],
-    ["2026-09-05",82],["2026-09-06",82],["2026-09-07",82],["2026-09-08",82]
+    ["2026-09-05",82],["2026-09-06",82],["2026-09-07",82],["2026-09-08",82],
+    ["2026-09-09",83],["2026-09-10",85],["2026-09-11",85],["2026-09-12",86],
+    ["2026-09-13",87],["2026-09-14",87],["2026-09-15",87],["2026-09-16",87]
   ];
 
   function fmtDate(iso) {
@@ -356,7 +358,7 @@
 
   // end label
   var endLbl = el("text", { class: "end-label", x: x(data.length - 1) - 4, y: y(data[data.length - 1][1]) - 16, "text-anchor": "end" });
-  endLbl.textContent = "82 as of Sep 8";
+  endLbl.textContent = "87 as of Sep 16";
   svg.appendChild(endLbl);
 
   // dots + hover targets
